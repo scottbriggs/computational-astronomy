@@ -56,11 +56,20 @@ EARTHRADM <- 6378140.0
 # Equatorial Radius of the Earth in kilometers
 EARTHRADKM <- EARTHRADM / 1000
 
-EARTHRADAU <- EARTHRADM / 1000 / KM2AU # Equatorial Radius of the Earth in AU
-FLAT <- 1/298.257 # Flattening of the Earth's reference ellipsoid (IAU 1976)
-EPOCHJ2000 <- 2451545.0 # Julian day for J2000
-DAYSJULCENT <- 36525 # Days per julian century
-ROTANGVELEARTH <- 7.29211511467e-5 # Rotational angular velocity of the Earth in radians/second
+# Equatorial Radius of the Earth in AU
+EARTHRADAU <- EARTHRADM / 1000 / KM2AU
+
+# Flattening of the Earth's reference ellipsoid (IAU 1976)
+FLAT <- 1/298.257
+
+# Julian day for J2000
+EPOCHJ2000 <- 2451545.0
+
+# Days per julian century
+DAYSJULCENT <- 36525
+
+# Rotational angular velocity of the Earth in radians/second
+ROTANGVELEARTH <- 7.29211511467e-5
 
 # DE441 Constants
 DE441STARTEPOCH <- -3100015.5 # Start Epoch
