@@ -23,6 +23,6 @@ CreateMasterDE441Mercury <- function()
   masterFileMercury <- dplyr::bind_rows(df_list)
   
   # Save aggregated data for Mercury
-  arrow::write_parquet(masterFileMercury, here::here("data", "processed", 
+  arrow::write_parquet(masterFileMercury, here("data", "processed", 
                                     "Mercury", "MercuryDE441.parquet"))
 }

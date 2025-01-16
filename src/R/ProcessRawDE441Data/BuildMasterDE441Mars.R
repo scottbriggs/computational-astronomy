@@ -23,6 +23,6 @@ CreateMasterDE441Mars <- function()
   masterFileMars <- dplyr::bind_rows(df_list)
   
   # Save aggregated data for Mars
-  arrow::write_parquet(masterFileMars, here::here("data", "processed", 
+  arrow::write_parquet(masterFileMars, here("data", "processed", 
                                     "Mars", "MarsDE441.parquet"))
 }

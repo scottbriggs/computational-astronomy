@@ -23,6 +23,6 @@ CreateMasterDE441Jupiter <- function()
   masterFileJupiter <- dplyr::bind_rows(df_list)
   
   # Save aggregated data Jupiter
-  arrow::write_parquet(masterFileJupiter, here::here("data", "processed", 
+  arrow::write_parquet(masterFileJupiter, here("data", "processed", 
                                     "Jupiter", "JupiterDE441.parquet"))
 }
