@@ -1,0 +1,15 @@
+# Build master parquet files for all DE441 objects
+
+BuildMasterDE441Sun()
+BuildMasterDE441Moon()
+BuildMasterDE441Mercury()
+BuildMasterDE441Venus()
+BuildMasterDE441EMB()
+BuildMasterDE441Mars()
+BuildMasterDE441Jupiter()
+BuildMasterDE441Saturn()
+BuildMasterDE441Uranus()
+BuildMasterDE441Neptune()
+BuildMasterDE441Pluto()
+BuildMasterDE441Nutation()
+BuildMasterDe441LunarLibrations()
