@@ -2,10 +2,6 @@
 # Build master parquet file for Uranus for all time periods in the
 # DE441 ephemeris from the individual parquet files
 
-library(here)
-library(arrow)
-library(dplyr)
-
 CreateMasterDE441Uranus <- function()
 {
   # Get list of all parquet files for Uranus
@@ -17,12 +13,16 @@ CreateMasterDE441Uranus <- function()
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
       here("data", "processed", "Uranus", fp[[i]]))
+    log_info('Reading Uranus parquet file {fp[[i]]}')
   }
   
   # Combine data frames into a single data frame
   masterFileUranus <- dplyr::bind_rows(df_list)
+  log_info('Merge Uranus parquet files into master')
   
   # Save aggregated data for Uranus
   arrow::write_parquet(masterFileUranus, here("data", "processed", 
-                                    "Uranus", "UranusDE441.parquet"))
+                                    "Uranus", "UranusMasterDE441.parquet"))
+  
+  logger::log_info('Saving file UranusMasterDE441.parquet')
 }

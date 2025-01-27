@@ -9,4 +9,15 @@ ProcessDE441ParquetFiles <- function()
   
   # Create master parquet file for Mercury
   CreateMasterDE441Mercury()
+  CreateMasterDE441Venus()
+  CreateMasterDE441EMB()
+  CreateMasterDE441Mars()
+  CreateMasterDE441Jupiter()
+  CreateMasterDE441Saturn()
+  CreateMasterDE441Uranus()
+  CreateMasterDE441Neptune()
+  CreateMasterDE441Pluto()
+  CreateMasterDE441Moon()
+  CreateMasterDE441Sun()
+  CreateMasterDE441Nutation()
 }

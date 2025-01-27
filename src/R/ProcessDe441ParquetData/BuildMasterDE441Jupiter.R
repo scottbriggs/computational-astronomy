@@ -2,10 +2,6 @@
 # Build master parquet file for Jupiter for all time periods in the
 # DE441 ephemeris from the individual parquet files
 
-library(here)
-library(arrow)
-library(dplyr)
-
 CreateMasterDE441Jupiter <- function()
 {
   # Get list of all parquet files for Jupiter
@@ -17,12 +13,16 @@ CreateMasterDE441Jupiter <- function()
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
       here("data", "processed", "Jupiter", fp[[i]]))
+    log_info('Reading Jupiter parquet file {fp[[i]]}')
   }
   
   # Combine data frames into a single data frame
   masterFileJupiter <- dplyr::bind_rows(df_list)
+  log_info('Merge Jupiter parquet files into master')
   
-  # Save aggregated data Jupiter
+  # Save aggregated data for Jupiter
   arrow::write_parquet(masterFileJupiter, here("data", "processed", 
-                                    "Jupiter", "JupiterDE441.parquet"))
+                                    "Jupiter", "JupiterMasterDE441.parquet"))
+  
+  logger::log_info('Saving file JupiterMasterDE441.parquet')
 }

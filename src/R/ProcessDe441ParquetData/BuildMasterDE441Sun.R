@@ -2,10 +2,6 @@
 # Build master parquet file for Sun for all time periods in the
 # DE441 ephemeris from the individual parquet files
 
-library(here)
-library(arrow)
-library(dplyr)
-
 CreateMasterDE441Sun <- function()
 {
   # Get list of all parquet files for Sun
@@ -17,12 +13,16 @@ CreateMasterDE441Sun <- function()
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
       here("data", "processed", "Sun", fp[[i]]))
+    log_info('Reading Sun parquet file {fp[[i]]}')
   }
   
   # Combine data frames into a single data frame
   masterFileSun <- dplyr::bind_rows(df_list)
+  log_info('Merge Sun parquet files into master')
   
-  # Save aggregated data for Moon
+  # Save aggregated data for Sun
   arrow::write_parquet(masterFileSun, here("data", "processed", 
-                                    "Sun", "SunDE441.parquet"))
+                                    "Sun", "SunMasterDE441.parquet"))
+  
+  logger::log_info('Saving file SunMasterDE441.parquet')
 }
