@@ -1,15 +1,12 @@
-# Build master parquet files for all DE441 objects
+# Build master parquet files for all bodies for all time periods in the
+# DE441 ephemeris from the individual parquet files
 
-BuildMasterDE441Sun()
-BuildMasterDE441Moon()
-BuildMasterDE441Mercury()
-BuildMasterDE441Venus()
-BuildMasterDE441EMB()
-BuildMasterDE441Mars()
-BuildMasterDE441Jupiter()
-BuildMasterDE441Saturn()
-BuildMasterDE441Uranus()
-BuildMasterDE441Neptune()
-BuildMasterDE441Pluto()
-BuildMasterDE441Nutation()
-BuildMasterDe441LunarLibrations()
+ProcessDE441ParquetFiles <- function()
+{
+  # Set up logger
+  tmp <- tempfile("ProcessDE441ParquetData", here("log"), fileext = ".txt")
+  log_appender(appender_file(tmp))
+  
+  # Create master parquet file for Mercury
+  CreateMasterDE441Mercury()
+}

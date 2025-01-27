@@ -13,42 +13,46 @@ ProcessDE441RawFiles <- function()
   tmp <- tempfile("ProcessRawDE441Data", here("log"), fileext = ".txt")
   log_appender(appender_file(tmp))
   
-  # Process data for Venus
-  ProcessDE441Mercury(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                      as.integer(DE441FileList[1,3]))
+  numFiles <- nrow(DE441FileList)
   
-  ProcessDE441Venus(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                    as.integer(DE441FileList[1,3]))
+  for (i in seq(from = 1, to = numFiles, by = 1)){
   
-  ProcessDE441EMB(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                    as.integer(DE441FileList[1,3]))
+    ProcessDE441Mercury(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                        as.integer(DE441FileList[i,3]))
   
-  ProcessDE441Mars(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                  as.integer(DE441FileList[1,3]))
+    ProcessDE441Venus(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                      as.integer(DE441FileList[i,3]))
   
-  ProcessDE441Jupiter(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                   as.integer(DE441FileList[1,3]))
+    ProcessDE441EMB(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                      as.integer(DE441FileList[i,3]))
   
-  ProcessDE441Saturn(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                      as.integer(DE441FileList[1,3]))
+    ProcessDE441Mars(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                    as.integer(DE441FileList[i,3]))
   
-  ProcessDE441Uranus(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                     as.integer(DE441FileList[1,3]))
-  
-  ProcessDE441Neptune(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                     as.integer(DE441FileList[1,3]))
-  
-  ProcessDE441Pluto(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                      as.integer(DE441FileList[1,3]))
-  
-  ProcessDE441Sun(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                    as.integer(DE441FileList[1,3]))
-  
-  ProcessDE441Moon(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                  as.integer(DE441FileList[1,3]))
-  
-  ProcessDE441Nutation(DE441FileList[1,1], as.integer(DE441FileList[1,2]), 
-                   as.integer(DE441FileList[1,3]))
+    ProcessDE441Jupiter(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                     as.integer(DE441FileList[i,3]))
+    
+    ProcessDE441Saturn(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                        as.integer(DE441FileList[i,3]))
+    
+    ProcessDE441Uranus(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                       as.integer(DE441FileList[i,3]))
+    
+    ProcessDE441Neptune(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                       as.integer(DE441FileList[i,3]))
+    
+    ProcessDE441Pluto(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                        as.integer(DE441FileList[i,3]))
+    
+    ProcessDE441Sun(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                      as.integer(DE441FileList[i,3]))
+    
+    ProcessDE441Moon(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                    as.integer(DE441FileList[i,3]))
+    
+    ProcessDE441Nutation(DE441FileList[i,1], as.integer(DE441FileList[i,2]), 
+                     as.integer(DE441FileList[i,3]))
+  }
 }
 
 
