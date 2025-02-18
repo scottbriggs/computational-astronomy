@@ -1,18 +1,18 @@
 
 # Build master parquet file for Neptune for all time periods in the
-# DE441 ephemeris from the individual parquet files
+# DE440 ephemeris from the individual parquet files
 
-CreateMasterDE441Neptune <- function()
+CreateMasterDE440Neptune <- function()
 {
   # Get list of all parquet files for Neptune
-  fp <- list.files(here("data", "processed", "de441", "Neptune"))
+  fp <- list.files(here("data", "processed", "de440", "Neptune"))
   
   # Create data frames for each parquet file
   numFiles <- length(fp)
   df_list <- vector(mode = "list", numFiles)
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
-      here("data", "processed", "de441", "Neptune", fp[[i]]))
+      here("data", "processed", "de440", "Neptune", fp[[i]]))
     log_info('Reading Neptune parquet file {fp[[i]]}')
   }
   
@@ -21,8 +21,8 @@ CreateMasterDE441Neptune <- function()
   log_info('Merge Neptune parquet files into master')
   
   # Save aggregated data for Neptune
-  arrow::write_parquet(masterFileNeptune, here("data", "processed", "de441",
-                                    "Neptune", "NeptuneMasterDE441.parquet"))
+  arrow::write_parquet(masterFileNeptune, here("data", "processed", "de440",
+                                    "Neptune", "NeptuneMasterDE440.parquet"))
   
-  logger::log_info('Saving file NeptuneMasterDE441.parquet')
+  logger::log_info('Saving file NeptuneMasterDE440.parquet')
 }

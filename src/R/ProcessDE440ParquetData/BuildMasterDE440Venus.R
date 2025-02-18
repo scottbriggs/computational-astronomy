@@ -1,18 +1,18 @@
 
 # Build master parquet file for Venus for all time periods in the
-# DE441 ephemeris from the individual parquet files
+# DE440 ephemeris from the individual parquet files
 
-CreateMasterDE441Venus <- function()
+CreateMasterDE440Venus <- function()
 {
   # Get list of all parquet files for Mercury
-  fp <- list.files(here("data", "processed", "de441", "Venus"))
+  fp <- list.files(here("data", "processed", "de440", "Venus"))
   
   # Create data frames for each parquet file
   numFiles <- length(fp)
   df_list <- vector(mode = "list", numFiles)
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
-      here("data", "processed", "de441", "Venus", fp[[i]]))
+      here("data", "processed", "de440", "Venus", fp[[i]]))
     log_info('Reading Venus parquet file {fp[[i]]}')
   }
   
@@ -21,8 +21,8 @@ CreateMasterDE441Venus <- function()
   log_info('Merge Venus parquet files into master')
   
   # Save aggregated data for Venus
-  arrow::write_parquet(masterFileVenus, here("data", "processed", "de441",
-                                    "Venus", "VenusMasterDE441.parquet"))
+  arrow::write_parquet(masterFileVenus, here("data", "processed", "de440",
+                                    "Venus", "VenusMasterDE440.parquet"))
   
-  logger::log_info('Saving file VenusMasterDE441.parquet')
+  logger::log_info('Saving file VenusMasterDE440.parquet')
 }

@@ -1,18 +1,18 @@
 
 # Build master parquet file for Sun for all time periods in the
-# DE441 ephemeris from the individual parquet files
+# DE440 ephemeris from the individual parquet files
 
-CreateMasterDE441Sun <- function()
+CreateMasterDE440Sun <- function()
 {
   # Get list of all parquet files for Sun
-  fp <- list.files(here("data", "processed", "de441", "Sun"))
+  fp <- list.files(here("data", "processed", "de440", "Sun"))
   
   # Create data frames for each parquet file
   numFiles <- length(fp)
   df_list <- vector(mode = "list", numFiles)
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
-      here("data", "processed", "de441", "Sun", fp[[i]]))
+      here("data", "processed", "de440", "Sun", fp[[i]]))
     log_info('Reading Sun parquet file {fp[[i]]}')
   }
   
@@ -21,8 +21,8 @@ CreateMasterDE441Sun <- function()
   log_info('Merge Sun parquet files into master')
   
   # Save aggregated data for Sun
-  arrow::write_parquet(masterFileSun, here("data", "processed", "de441",
-                                    "Sun", "SunMasterDE441.parquet"))
+  arrow::write_parquet(masterFileSun, here("data", "processed", "de440",
+                                    "Sun", "SunMasterDE440.parquet"))
   
-  logger::log_info('Saving file SunMasterDE441.parquet')
+  logger::log_info('Saving file SunMasterDE440.parquet')
 }

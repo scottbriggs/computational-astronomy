@@ -1,18 +1,18 @@
 
 # Build master parquet file for Pluto for all time periods in the
-# DE441 ephemeris from the individual parquet files
+# DE440 ephemeris from the individual parquet files
 
-CreateMasterDE441Pluto <- function()
+CreateMasterDE440Pluto <- function()
 {
   # Get list of all parquet files for Pluto
-  fp <- list.files(here("data", "processed", "de441", "Pluto"))
+  fp <- list.files(here("data", "processed", "de440", "Pluto"))
   
   # Create data frames for each parquet file
   numFiles <- length(fp)
   df_list <- vector(mode = "list", numFiles)
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
-      here("data", "processed", "de441", "Pluto", fp[[i]]))
+      here("data", "processed", "de440", "Pluto", fp[[i]]))
     log_info('Reading Pluto parquet file {fp[[i]]}')
   }
   
@@ -21,8 +21,8 @@ CreateMasterDE441Pluto <- function()
   log_info('Merge Pluto parquet files into master')
   
   # Save aggregated data for Pluto
-  arrow::write_parquet(masterFilePluto, here("data", "processed", "de441",
-                                    "Pluto", "PlutoMasterDE441.parquet"))
+  arrow::write_parquet(masterFilePluto, here("data", "processed", "de440",
+                                    "Pluto", "PlutoMasterDE440.parquet"))
   
-  logger::log_info('Saving file PlutoMasterDE441.parquet')
+  logger::log_info('Saving file PlutoMasterDE440.parquet')
 }

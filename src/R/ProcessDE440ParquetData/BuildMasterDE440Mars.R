@@ -1,18 +1,18 @@
 
 # Build master parquet file for Mars for all time periods in the
-# DE441 ephemeris from the individual parquet files
+# DE440 ephemeris from the individual parquet files
 
-CreateMasterDE441Mars <- function()
+CreateMasterDE440Mars <- function()
 {
   # Get list of all parquet files for Mars
-  fp <- list.files(here("data", "processed", "de441", "Mars"))
+  fp <- list.files(here("data", "processed", "de440", "Mars"))
   
   # Create data frames for each parquet file
   numFiles <- length(fp)
   df_list <- vector(mode = "list", numFiles)
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
-      here("data", "processed", "de441", "Mars", fp[[i]]))
+      here("data", "processed", "de440", "Mars", fp[[i]]))
     log_info('Reading Mars parquet file {fp[[i]]}')
   }
   
@@ -21,8 +21,8 @@ CreateMasterDE441Mars <- function()
   log_info('Merge Mars parquet files into master')
   
   # Save aggregated data for Mars
-  arrow::write_parquet(masterFileMars, here("data", "processed", "de441",
-                                    "Mars", "MarsMasterDE441.parquet"))
+  arrow::write_parquet(masterFileMars, here("data", "processed", "de440",
+                                    "Mars", "MarsMasterDE440.parquet"))
   
-  logger::log_info('Saving file MarsMasterDE441.parquet')
+  logger::log_info('Saving file MarsMasterDE440.parquet')
 }

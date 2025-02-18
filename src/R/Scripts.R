@@ -1,4 +1,5 @@
 
+# Libraries used by the various functions
 library(logger)
 library(arrow)
 library(writexl)
@@ -9,7 +10,10 @@ library(httr)
 library(jsonlite)
 library(duckdb)
 
+# Mathematical and ephemeris constants used by the various functions
 source(here("src", "R", "constants.R"))
+
+# Functions used to process the DE441 ephemeris raw files
 source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441FileList.R"))
 source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441RawData.R"))
 source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441Mercury.R"))
@@ -24,6 +28,9 @@ source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441Pluto.R"))
 source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441Sun.R"))
 source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441Moon.R"))
 source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441Nutation.R"))
+
+# Functions used to convert the DE441 individual parquet files for each raw file
+# into a master parquet file for each solar system body
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Data.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Mercury.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Venus.R"))
@@ -37,12 +44,25 @@ source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Pluto.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Moon.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Sun.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Nutation.R"))
+
+# Function to used the NASA API calculate the julian day number
 source(here("src", "R", "CreateJulianDayNumberTable.R"))
+
+# Functions to calculate dates
 source(here("src", "R", "Date.R"))
+
+# Functions to convert between hours and degrees
 source(here("src", "R", "UnitConversions.R"))
+
+# Function to populate a duckdb database with DE441 and DE440 data
 source(here("src", "R", "CreateDatabase", "CreateDE441DE440Database.R"))
+
+# Functions to calculate solar system position and velocity vectors using
+# the DE441 data
 source(here("src", "R", "DE441SolarSystemPosVel", "PositionMercurySSB.R"))
 source(here("src", "R", "DE441SolarSystemPosVel", "PositionVenusSSB.R"))
+
+# Functions used to process the DE440 ephemeris raw files
 source(here("src", "R", "ProcessRawDE440Data", "ProcessDE440RawData.R"))
 source(here("src", "R", "ProcessRawDE440Data", "ProcessDE440Mercury.R"))
 source(here("src", "R", "ProcessRawDE440Data", "ProcessDE440Venus.R"))
@@ -57,5 +77,20 @@ source(here("src", "R", "ProcessRawDE440Data", "ProcessDE440Sun.R"))
 source(here("src", "R", "ProcessRawDE440Data", "ProcessDE440Moon.R"))
 source(here("src", "R", "ProcessRawDE440Data", "ProcessDE440Nutation.R"))
 
+# Functions used to convert the DE440 individual parquet files for each raw file
+# into a master parquet file for each solar system body
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Data.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Mercury.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Venus.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440EMB.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Mars.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Jupiter.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Saturn.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Uranus.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Neptune.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Pluto.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Moon.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Sun.R"))
+source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Nutation.R"))
 
 

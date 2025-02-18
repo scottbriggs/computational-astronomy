@@ -1,18 +1,18 @@
 
 # Build master parquet file for EMB for all time periods in the
-# DE441 ephemeris from the individual parquet files
+# DE440 ephemeris from the individual parquet files
 
-CreateMasterDE441EMB <- function()
+CreateMasterDE440EMB <- function()
 {
   # Get list of all parquet files for EMB
-  fp <- list.files(here("data", "processed", "de441", "EMB"))
+  fp <- list.files(here("data", "processed", "de440", "EMB"))
   
   # Create data frames for each parquet file
   numFiles <- length(fp)
   df_list <- vector(mode = "list", numFiles)
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
-      here("data", "processed", "de441", "EMB", fp[[i]]))
+      here("data", "processed", "de440", "EMB", fp[[i]]))
     log_info('Reading EMB parquet file {fp[[i]]}')
   }
   
@@ -21,8 +21,8 @@ CreateMasterDE441EMB <- function()
   log_info('Merge EMB parquet files into master')
   
   # Save aggregated data for EMB
-  arrow::write_parquet(masterFileEMB, here("data", "processed", "de441",
-                                    "EMB", "EMBMasterDE441.parquet"))
+  arrow::write_parquet(masterFileEMB, here("data", "processed", "de440",
+                                    "EMB", "EMBMasterDE440.parquet"))
   
-  logger::log_info('Saving file EMBMasterDE441.parquet')
+  logger::log_info('Saving file EMBMasterDE440.parquet')
 }

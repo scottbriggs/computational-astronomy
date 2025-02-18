@@ -1,18 +1,18 @@
 
 # Build master parquet file for Nutation for all time periods in the
-# DE441 ephemeris from the individual parquet files
+# DE440 ephemeris from the individual parquet files
 
-CreateMasterDE441Nutation <- function()
+CreateMasterDE440Nutation <- function()
 {
   # Get list of all parquet files for Nutation
-  fp <- list.files(here("data", "processed", "de441", "Nutation"))
+  fp <- list.files(here("data", "processed", "de440", "Nutation"))
   
   # Create data frames for each parquet file
   numFiles <- length(fp)
   df_list <- vector(mode = "list", numFiles)
   for (i in 1:numFiles) {
     df_list[[i]] <- arrow::read_parquet(
-      here("data", "processed", "de441", "Nutation", fp[[i]]))
+      here("data", "processed", "de440", "Nutation", fp[[i]]))
     log_info('Reading Nutation parquet file {fp[[i]]}')
   }
   
@@ -21,8 +21,8 @@ CreateMasterDE441Nutation <- function()
   log_info('Merge Nutation parquet files into master')
   
   # Save aggregated data for Nutation
-  arrow::write_parquet(masterFileNutation, here("data", "processed", "de441",
-                                    "Nutation", "NutationMasterDE441.parquet"))
+  arrow::write_parquet(masterFileNutation, here("data", "processed", "de440",
+                                    "Nutation", "NutationMasterDE440.parquet"))
   
-  logger::log_info('Saving file NutationMasterDE441.parquet')
+  logger::log_info('Saving file NutationMasterDE440.parquet')
 }
