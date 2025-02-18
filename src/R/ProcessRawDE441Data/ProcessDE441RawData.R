@@ -3,9 +3,6 @@
 
 ProcessDE441RawFiles <- function()
 {
-  # Create DE441 file list
-  ProcessDE441FileList.R
-  
   # Read DE441 file list
   DE441FileList <- read_excel(here("data", "raw", "de441", "DE441FileSize.xlsx"))
   
