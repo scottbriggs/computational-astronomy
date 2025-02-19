@@ -61,6 +61,17 @@ source(here("src", "R", "CreateDatabase", "CreateDE441DE440Database.R"))
 # the DE441 data
 source(here("src", "R", "DE441SolarSystemPosVel", "PositionMercurySSB.R"))
 source(here("src", "R", "DE441SolarSystemPosVel", "PositionVenusSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionEarthSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionMarsSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionJupiterSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionSaturnSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionUranusSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionNeptuneSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionPlutoSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionMoonGEO.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "PositionSunSSB.R"))
+source(here("src", "R", "DE441SolarSystemPosVel", "Nutation.R"))
+
 
 # Functions used to process the DE440 ephemeris raw files
 source(here("src", "R", "ProcessRawDE440Data", "ProcessDE440RawData.R"))
