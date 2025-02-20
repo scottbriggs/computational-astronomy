@@ -1,6 +1,6 @@
 
 # Calculate the precession matrix
-precessionMatrix <- function(jd)
+PrecessionMatrix <- function(jd)
 {
   # Periodic terms in PA and QA - Table 1
   PA_C <- c(-5486.751211, -17.127623, -617.517403, 413.442940, 78.614193,

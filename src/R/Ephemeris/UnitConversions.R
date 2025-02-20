@@ -139,3 +139,28 @@ DegToHMS <- function(decDeg)
 
   return (HourToHMS(decHr))
 }
+
+# Return string for degrees, arcminutes, and arcseconds
+DMSString <- function(dms)
+{
+  str <- sprintf("%s %d\u00B0 %d' %.2f",
+                 dms[[1]], dms[[2]][1], dms[[2]][2], dms[[2]][3])
+  
+  return (str)
+}
+
+# Return string for hours, minutes, and seconds
+HMSString <- function(hms)
+{
+  str <- sprintf("%dh %dm %.2fs", hms[1], hms[2], hms[3])
+  
+  return(str)
+}
+
+# Return string for hours and minutes
+HMString <- function(hm)
+{
+  str <- sprintf("%dh %dm ", hm[1], hm[2])
+  
+  return(str)
+}

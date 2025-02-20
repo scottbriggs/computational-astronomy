@@ -11,7 +11,7 @@ library(jsonlite)
 library(duckdb)
 
 # Mathematical and ephemeris constants used by the various functions
-source(here("src", "R", "constants.R"))
+source(here("src", "R", "Ephemeris", "constants.R"))
 
 # Functions used to process the DE441 ephemeris raw files
 source(here("src", "R", "ProcessRawDE441Data", "ProcessDE441FileList.R"))
@@ -46,13 +46,13 @@ source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Sun.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Nutation.R"))
 
 # Function to used the NASA API calculate the julian day number
-source(here("src", "R", "CreateJulianDayNumberTable.R"))
+source(here("src", "R", "Ephemeris", "CreateJulianDayNumberTable.R"))
 
 # Functions to calculate dates
-source(here("src", "R", "Date.R"))
+source(here("src", "R", "Ephemeris", "Date.R"))
 
 # Functions to convert between hours and degrees
-source(here("src", "R", "UnitConversions.R"))
+source(here("src", "R", "Ephemeris", "UnitConversions.R"))
 
 # Function to populate a duckdb database with DE441 and DE440 data
 source(here("src", "R", "CreateDatabase", "CreateDE441DE440Database.R"))
@@ -104,4 +104,21 @@ source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Moon.R"))
 source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Sun.R"))
 source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Nutation.R"))
 
+# Functions for various math operations
+source(here("src", "R", "Ephemeris", "MathConversions.R"))
+
+# Functions to calculate precession
+source(here("src", "R", "Ephemeris", "Precession.R"))
+
+# Functions to calculate the apparent place of solar system bodies
+source(here("src", "R", "Ephemeris", "ApparentPlace.R"))
+
+# Function to calculate the obliquity of the ecliptic
+source(here("src", "R", "Ephemeris", "Obliquity.R"))
+
+# Functions to calculate time-related quantities
+source(here("src", "R", "Ephemeris", "Time.R"))
+
+# Functions to calculate coordinate transformations
+source(here("src", "R", "Ephemeris", "Coordinate.R"))
 
