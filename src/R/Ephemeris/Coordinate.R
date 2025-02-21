@@ -238,7 +238,7 @@ FindHorizonCoordinatesSun <- function(year, month, day, hour, tz, dst, obsLat, o
   # Calculate delta t in seconds
   delta_t <- deltaT(year, month)
   # Calculate the julian day number for dynamical time
-  jd_td <- jd_ut + delta_t / SEC2DAY
+  jd_td <- jd_ut + delta_t / SECDAY
   # Calculate Greenwich sidereal time
   gSidTime <- gst(jd_ut, delta_t)
   

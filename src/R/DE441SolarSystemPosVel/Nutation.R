@@ -58,8 +58,8 @@ NutationAngles <- function(jd)
 # Create the nutation matrix
 NutationMatrix <- function(jd)
 {
-  nut_angles <- nutationAngles(jd)
-  obliq <- obliquity(jd, nut_angles)
+  nut_angles <- NutationAngles(jd)
+  obliq <- Obliquity(jd, nut_angles)
   
   # Calculate the nutation matrix elements
   cos_long <- cos(nut_angles[[1]])

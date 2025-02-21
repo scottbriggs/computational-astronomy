@@ -9,6 +9,7 @@ library(stringr)
 library(httr)
 library(jsonlite)
 library(duckdb)
+library(tidygeocoder)
 
 # Mathematical and ephemeris constants used by the various functions
 source(here("src", "R", "Ephemeris", "constants.R"))

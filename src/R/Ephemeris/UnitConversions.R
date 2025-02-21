@@ -143,8 +143,8 @@ DegToHMS <- function(decDeg)
 # Return string for degrees, arcminutes, and arcseconds
 DMSString <- function(dms)
 {
-  str <- sprintf("%s %d\u00B0 %d' %.2f",
-                 dms[[1]], dms[[2]][1], dms[[2]][2], dms[[2]][3])
+  str <- sprintf("%d\u00B0 %dm %.2fs",
+                 dms[1], dms[2], dms[3])
   
   return (str)
 }
