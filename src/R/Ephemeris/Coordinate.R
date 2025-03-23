@@ -242,7 +242,7 @@ FindHorizonCoordinatesSun <- function(year, month, day, hour, tz, dst, obsLat, o
   # Calculate Greenwich sidereal time
   gSidTime <- gst(jd_ut, delta_t)
   
-  # Convert Greenwich sidereal time to local sideral time
+  # Convert Greenwich sidereal time to local sidereal time
   lst <- gstToLst(gSidTime[[1]][1], obsLong)
   
   # Calculate the apparent place of the Sun in RA and Dec
@@ -284,3 +284,24 @@ findAltitudeAzimuthSunDay <- function(year, month, day, tz, dst, obsLat, obsLong
   
   return(df)
 }
+
+# Function to find the local coordinates of a place on the 
+# Earth's surface. Address is a string representing an address used to 
+# find the latitude in degrees, longitude in degrees, and time zone of a place.
+FindLocalPlace <- function(addr)
+{
+  res1 <- geo(address = addr, method = "osm")
+  latitude <- c(res1[[2]])
+  longitude <- c(res1[[3]])
+  
+  res2 <- tz_lookup_coords(latitude, longitude, method = "accurate",
+                           warn = FALSE)
+  
+  z <- list(latitude, longitude, res2)
+  names(z) <- c("Latitude", "Longitude", "Time Zone")
+  
+  return (z)
+}
+
+
+
