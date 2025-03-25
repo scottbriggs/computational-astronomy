@@ -1,0 +1,36 @@
+project:
+  type: book
+  output-dir: book
+
+book:
+  title: "Computational Astronomy"
+  reader-mode: true
+
+  page-footer:
+    left: |
+      R for Data Science (2e) was written by Scott Briggs.
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+  
+  chapters:
+    - index.qmd
+    #- preface.qmd
+    #- intro.qmd
+    #- computer-programming-concepts.qmd
+    #- math-concepts.qmd
+    #- unit-conversions.qmd
+    #- time-conversions.qmd
+    - coordinate-systems.qmd
+    #- de440-441.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - computational-astronomy.scss
+    code-link: true
+
+    author-meta: "Scott Briggs"
+    callout-appearance: simple
+
+editor: visual
