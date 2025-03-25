@@ -8,7 +8,7 @@ book:
 
   page-footer:
     left: |
-      R for Data Science (2e) was written by Scott Briggs.
+      Computational Astronomy was written by Scott Briggs.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   
@@ -21,7 +21,7 @@ book:
     #- unit-conversions.qmd
     #- time-conversions.qmd
     - coordinate-systems.qmd
-    #- de440-441.qmd
+    - de440-441.qmd
 
 format:
   html:
