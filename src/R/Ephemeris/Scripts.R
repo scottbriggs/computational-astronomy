@@ -12,6 +12,8 @@ library(duckdb)
 library(tidygeocoder)
 library(lutz)
 library(lubridate)
+library(kableExtra)
+library(magrittr)
 
 # Mathematical and ephemeris constants used by the various functions
 source(here("src", "R", "Ephemeris", "constants.R"))

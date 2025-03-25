@@ -1,1 +1,1 @@
-# computational-astronomy
+# Computational Astronomy
