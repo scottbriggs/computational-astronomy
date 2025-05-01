@@ -71,6 +71,11 @@ DAYSJULCENT <- 36525
 # Rotational angular velocity of the Earth in radians/second
 ROTANGVELEARTH <- 7.29211511467e-5
 
+MONTHSTR <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+                 "Sep", "Oct", "Nov", "Dec")
+
+WEEKSTR <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+
 # DE441 Constants
 DE441STARTEPOCH <- -3100015.5 # Start Epoch
 DE441ENDEPOCH <- 8000016.5 # End Epoch

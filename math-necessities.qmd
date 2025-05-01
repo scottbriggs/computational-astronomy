@@ -1,0 +1,19 @@
+# Mathematical Necessities
+
+```{r include = FALSE}
+source("_common.R")
+```
+
+## Vectors
+
+### Dot product
+
+### Cross Product
+
+### Vector Normal
+
+### Unit Vectors
+
+## Matrix Multiplication
+
+## Interpolation

@@ -1,0 +1,33 @@
+# Time Conversions
+
+```{r include = FALSE}
+source("_common.R")
+```
+
+## Background
+
+## Julian Day Number
+
+```{r echo=TRUE, results='hold'}
+y <- c(2000, 1987, 1987, 1988, 1988, 1900, 1600, 1600, 837, -1000, -1000,
+          -1001, -4712, -5000)
+
+m <- c("Jan", "Jan", "Jun", "Jan", "Jun", "Jan", "Jan", "Dec", "Apr", "Jul",
+       "Feb", "Aug", "Jan", "Aug")
+
+d <-c(1.5, 27, 19.5, 27, 19.5, 1, 1, 31, 10.3, 12.5, 29, 17.9, 1.5, 1.5)
+
+l <- length(y)
+
+jdn <- vector("numeric", l)
+dow <- vector("character", l)
+
+for (x in 1:l) {
+jdn[x] <-JulianDayNumber(y[x], which(MONTHSTR==m[x]), d[x])
+dow[x] <- DayOfWeek(jdn[x])
+}
+
+df <- data.frame(y, m, d, dow, jdn)
+df
+
+```

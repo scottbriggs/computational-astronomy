@@ -16,12 +16,11 @@ book:
     - index.qmd
     #- preface.qmd
     #- intro.qmd
-    #- computer-programming-concepts.qmd
-    #- math-concepts.qmd
+    - math-necessities.qmd
     #- unit-conversions.qmd
-    #- time-conversions.qmd
+    - time-conversions.qmd
     - coordinate-systems.qmd
-    - de440-441.qmd
+    - de441.qmd
 
 format:
   html:

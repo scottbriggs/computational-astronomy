@@ -1,12 +1,15 @@
-## JPL DE441 Ephemeris Files
+## JPL DE441 Ephemeris
 
 ```{r include = FALSE}
 source("_common.R")
 ```
 
-## DE441 Summary
+The JPL Development Ephemeris 441 (DE441) provides accurate data on the positions of the planets, moon, sun, nutation angles, and lunar librations. The time frame for DE441 is:
 
-
+- Start Epoch: Julian Day Number = -3100015.5
+- Start Epoch: Julian Calendar Date = August 15, -13200
+- Final Epoch: Julian Day Number = 8000016.5
+- Final Epoch: Gregorian Calendar Date = March 15, 17191
 
 ## DE441 Files and File Structure
 

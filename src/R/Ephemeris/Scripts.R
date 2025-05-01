@@ -127,3 +127,5 @@ source(here("src", "R", "Ephemeris", "Time.R"))
 # Functions to calculate coordinate transformations
 source(here("src", "R", "Ephemeris", "Coordinate.R"))
 
+source(here("src", "R", "Ephemeris", "JulianDayNumbernew.R"))
+
