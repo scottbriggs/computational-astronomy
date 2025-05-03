@@ -29,5 +29,4 @@ dow[x] <- DayOfWeek(jdn[x])
 
 df <- data.frame(y, m, d, dow, jdn)
 df
-
 ```
