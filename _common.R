@@ -11,4 +11,5 @@ knitr::opts_chunk$set(
 
 options(
   digits=15
-  )
+)
+
