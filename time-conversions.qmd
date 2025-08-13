@@ -9,13 +9,21 @@ source("_common.R")
 ## Julian Day Number
 
 ```{r echo=TRUE, results='hold'}
-y <- c(2000, 1987, 1987, 1988, 1988, 1900, 1600, 1600, 837, -1000, -1000,
-          -1001, -4712, -5000)
 
-m <- c("Jan", "Jan", "Jun", "Jan", "Jun", "Jan", "Jan", "Dec", "Apr", "Jul",
-       "Feb", "Aug", "Jan", "Aug")
+y <- c(2000L, 1987L, 1987L, 1988L, 1988L, 1900L, 1600L, 1600L, 837L, -1000L,
+       -1000L, -1001L, -4712L, -5000L, 17191L, -9999L)
 
-d <-c(1.5, 27, 19.5, 27, 19.5, 1, 1, 31, 10.3, 12.5, 29, 17.9, 1.5, 1.5)
+m <- c(1L, 1L, 6L, 1L, 6L, 1L, 1L, 12L, 4L, 7L, 2L, 8L, 1L, 8L, 3L, 1L)
+
+d <- c(1L, 27L, 19L, 27L, 19L, 1L, 1L, 31L, 10L, 12L, 29L, 17L, 1L, 1L,
+      15L, 1L)
+
+hh <- c(12L, 0L, 12L, 0L, 12L, 0L, 15L, 9L, 20L, 12L, 0L, 3L, 12L, 12L,
+       0L, 0L)
+
+mm <- c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L)
+
+ss <- c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L)
 
 l <- length(y)
 
@@ -23,10 +31,51 @@ jdn <- vector("numeric", l)
 dow <- vector("character", l)
 
 for (x in 1:l) {
-jdn[x] <-JulianDayNumber(y[x], which(MONTHSTR==m[x]), d[x])
-dow[x] <- DayOfWeek(jdn[x])
+  jdn[x] <-JulianDayNumber(y[x], m[x], d[x], hh[x], mm[x], ss[x])
 }
 
-df <- data.frame(y, m, d, dow, jdn)
+df <- data.frame(y, m, d, hh, mm, ss, jdn)
+colnames(df) <- c("Year", "Month", "Day", "Hours", "Minutes", "Seconds",
+                  "JDN")
+df
+
+```
+
+## Calendar Date
+
+```{r echo=TRUE, results='hold'}
+
+jdn <- c(2451545.0,  2446822.5,  2446966.0,  2447187.5,  2447332.0,  2415020.5, 
+         2305448.125, 2305812.875,  2026872.333333, 1356001.0,  1355866.5,
+         1355670.625, 0.0,  -104979.0, 8000016.5, -1931076.5)
+
+l <- length(jdn)
+df <- data.frame()
+
+for (x in 1:l) {
+  new_row <- data.frame(CalendarDate(jdn[x]))
+  df <- rbind(df, new_row)
+}
+
+df
+
+```
+
+## Date of Easter
+
+The algorithm to calculate the date of Easter comes from @meeus1991. The algorithm correctly calculates the date of Easter in both the Gregorian and Julian calendars.
+
+```{r echo=TRUE, results='hold'}
+
+year <- c(2025, 2000, 1964, 1800, 1500, 1000, 500, 200)
+
+l <- length(year)
+df <- data.frame()
+
+for (x in 1:l) {
+  new_row <- data.frame(DateOfEaster(year[x]))
+  df <- rbind(df, new_row)
+}
+
 df
 ```

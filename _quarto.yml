@@ -17,16 +17,20 @@ book:
     #- preface.qmd
     #- intro.qmd
     - math-necessities.qmd
-    #- unit-conversions.qmd
+    - unit-conversions.qmd
     - time-conversions.qmd
     - coordinate-systems.qmd
     - de441.qmd
+    - references.qmd
+
+bibliography: references.bib
+csl: turabian-author-date.csl
 
 format:
   html:
     theme:
-      - cosmo
-      - computational-astronomy.scss
+      light: flatly
+      dark: darkly
     code-link: true
 
     author-meta: "Scott Briggs"
