@@ -1,126 +1,86 @@
 
 # Date functions
 
-# Calculates the Julian Day given the month, day, and year. The algorithm works
-# for any date in the common era (CE) or before the common era (BCE).
-# The Julian Day Number is calculated for a calendar date at 12 noon.
-# Decimal day numbers are handled
-JulianDayNumber <- function(year, month, day)
-{
-  # Gregorian calendar adopted October 15, 1582
-  IGREG <- (15 + 31 * (10 + 12 * 1582))
-  jm <- 0
+# Julian Day Number
+# Use the NASA API to retrieve the julian day number given a calendar date
+# The year ranges from -9999-01-01 to 99999-12-31
+# The month ranges from 01-12
+# The day ranges from 01-31
+# Hours range from 1 - 23
+# Minutes range from 1 59
+# Seconds range from 1 - 59
+
+JulianDayNumber <- function(year, month, day, hour, minute, second) {
   
-  intDay <- trunc(day)
-  fracDay <- day - intDay
+  # Format datetime for the API
+  datetime <- sprintf("%+05d-%02d-%02d_%02d:%02d:%02d", year, month, day, hour, minute, second)
   
-  jy <- year
+  # Build API URL
+  url <- paste0("https://ssd-api.jpl.nasa.gov/jd_cal.api?cd=", datetime)
   
-  if (month > 2)
-  { 
-    jm <- month + 1
-  } else {
-    jy <- jy - 1
-    jm <- month + 13
+  httr::set_config(httr::config(ssl_verifypeer = FALSE))
+  
+  # Perform GET request
+  response <- GET(url)
+  
+  # Check if request was successful
+  if (status_code(response) != 200) {
+    stop("API request failed: ", content(response, "text"))
   }
   
-  julday <- floor(365.25 * jy) + floor(30.6001 * jm) + intDay + 1720995
+  # Parse API response
+  data <- fromJSON(rawToChar(response$content))
   
-  # Check if date is in the Gregorian calendar. If so, apply corrections
-  if (intDay + 31 * (month + 12 * year) >= IGREG)
-  {
-    ja <- trunc(0.01 * jy)
-    julday <- julday + 2 - ja + trunc(0.25 * ja)
-  }
-  
-  # Handle decimal day numbers
-  if (fracDay > 0.5){
-    fracDay <- fracDay - 0.5
-    julday <- julday + fracDay}
-  else if (fracDay <= 0.5){
-    fracDay <- 0.5 - fracDay
-    julday <- julday - fracDay
-  }
-  
-  return (julday)
+  return(as.numeric(data$jd))
 }
 
-# Calculate the calendar date given the julian day number. The algorithm works
-# for both Gregorian and Julian Calendar dates
-CalendarDate <- function(jdn)
+# Calendar Date
+# Use the NASA API to retrieve the calendar date for a julian day number
+# The julian date number can range from -1931076.5 to 38245308.5
+CalendarDate <- function(jd)
 {
-  IGREG <- 2299161
-  ja <- 0
+  # Format API URL
+  url <- paste0("https://ssd-api.jpl.nasa.gov/jd_cal.api?jd=", jd, "&format=d.5")
   
-  if (jdn >= IGREG){
-    jalpha <- trunc((jdn-1867216.25) / 36524.25)
-    ja <- jdn + 1 + jalpha - trunc(jalpha/4)
-  } else if (jdn < 0) {
-    ja <- jdn + 36525 * (1 - jdn/36525)
-  } else {
-    ja <- jdn
-  }
+  httr::set_config(httr::config(ssl_verifypeer = FALSE))
   
-  jb <- ja + 1524
-  jc <- trunc(6680 + (jb - 2439870 - 122.1) / 365.25)
-  jd <- trunc(365.25 * jc)
-  je <- trunc((jb - jd) / 30.6001)
-  day <- jb - jd - trunc(30.6001 * je)
-  month <- je - 1
-  if (month > 12) {
-    month <- month - 12
-  }
-  year <- jc - 4715
-  if (month > 2){
-    year <- year  - 1
-  }
-  if (year <= 0){
-    year <- year - 1
-  }
-  if (jdn < 0) {
-    year <- year - 100 * (1 - jdn) / 36525
+  # Perform GET request
+  response <- GET(url)
+  
+  # Check for a successful response
+  if (status_code(response) != 200) {
+    stop("API request failed: ", content(response, "text"))
   }
   
-  calendarDate <- c(year, month, day)
+  # Parse JSON response
+  data <- fromJSON(rawToChar(response$content))
   
-  return (calendarDate)
+  # Extract components from the response
+  year <- data$year
+  month <- data$month_name
+  day <- as.integer(data$day_and_time)
+  doy <- data$doy
+  dow_name <- data$dow_name
+  
+  # Convert fractional days to hours, minutes, and seconds
+  frac_day <- as.numeric(data$day_and_time) - as.integer(data$day_and_time)
+  
+  total_seconds <- frac_day * SECDAY
+  
+  hours <- floor(total_seconds / 3600)
+  minutes <- floor((total_seconds %% 3600) / 60)
+  seconds <- round(total_seconds %% 60)
+  
+  df <- data.frame(year, month, day, hours, minutes, seconds, jd, dow_name,
+                   doy)
+  
+  colnames(df) <- c("Year", "Month", "Day", "Hours", "Minutes", "Seconds",
+                    "JDN", "DOW", "DOY")
+  
+  return(df)
 }
 
-# Calculate the day of week for the julian day number at 12 noon
-DayOfWeek <- function(jdn)
-{
-  # Assume that the julian day number has been calculated for any time during
-  # a day. Convert the julian day number to be at 12 noon
-  jdn_int <- trunc(jdn)
-  jdn_t <- jdn_int + 0.5
-  
-  dow_num <- (jdn_t + 1.5) %% 7
-  dow <- ""
-  
-  if (dow_num == 0){
-    dow <- "Sun"
-  } else if (dow_num == 1) {
-    dow <- "Mon"
-  } else if (dow_num == 2) {
-    dow <- "Tue"
-  } else if (dow_num == 3) {
-    dow <- "Wed"
-  } else if (dow_num == 4) {
-    dow <- "Thu"
-  } else if (dow_num == 5) {
-    dow <- "Fri"
-  } else if (dow_num == 6) {
-    dow <- "Sat"
-  } else if (dow_num == 7) {
-    dow <- "Sun"
-  } else {
-    stop("Invalid value for day of week")
-  }
-  
-  return (dow)
-}
-
-# Caludate the date of Easter in the Gregorian and Julian calendars
+# Calculate the date of Easter in the Gregorian and Julian calendars
 DateOfEaster <- function(year)
 {
   month <- ""
@@ -169,5 +129,8 @@ DateOfEaster <- function(year)
     day <- g + 1
   }
   
-  return(c(month, day))
+  res <- data.frame(year, month, day)
+  colnames(res) <- c("Year", "Month", "Day")
+  
+  return(res)
 }

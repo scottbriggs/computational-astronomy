@@ -1,30 +1,4 @@
 
-# Function that calculates the integer part of a floating point number.
-# Handles positive and negative numbers.
-
-IntPart <- function(x)
-{
-  y <- floor(x)
-
-  return (y)
-}
-
-
-# Function that calculates the fractional part of a floating point number.
-# Handles positive and negative numbers.
-
-FracPart <- function(x)
-{
-  y <- 0
-  if (x <= 0) {
-    y <- x - IntPart(x)
-  } else {
-    y <- abs(x) - IntPart(abs(x))
-  }
-
-  return (y)
-}
-
 # x is a vector of length 3
 # y is a vector of length 3
 DotProduct <- function(x, y)

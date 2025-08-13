@@ -7,6 +7,7 @@ CreateJulianDayNumberTable <- function(){
   
   # Call the NASA API with the earliest julian day number supported
   # by the API
+  httr::set_config(config(ssl_verifypeer = 0L))
   res <- GET("https://ssd-api.jpl.nasa.gov/jd_cal.api?jd=-1931076.5")
   data <- fromJSON(rawToChar(res$content))
   
