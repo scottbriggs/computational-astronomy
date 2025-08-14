@@ -8,7 +8,35 @@ source("_common.R")
 
 ## Rectangular Coordinates to Polar Coordinates
 
+$x = r \sin \theta \cos \phi$
+
+$y = r \sin \theta \sin \phi$
+
+$z = r \cos \theta$
+
+x = x coordinate, horizontal
+
+y = y coordinate, depth
+
+z = z coordinate, vertical
+
+$\theta$ = vertical
+
+$\phi$ = horizontal
+
+r = radius
+
 ## Polar Coordinates to Rectangular Coordinates
+
+$r = \sqrt(x^2 + y^2 + z^2)$
+
+$\cos \theta = \frac{x}{r}$
+
+$\cos \phi = \frac{x}{\sqrt(x^2 + y^2)}$
+
+$\sin \phi = \frac{y}{\sqrt(x^2 + y^2)}$
+
+$\tan \phi = \frac{y}{x}$
 
 ## Equatorial to Ecliptic Transformation
 

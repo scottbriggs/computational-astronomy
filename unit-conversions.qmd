@@ -4,14 +4,34 @@
 source("_common.R")
 ```
 
-## Degrees and Degrees, Arcminutes, and Arcseconds
+## Degrees, Arc-Minutes, and Arc-Seconds (DMS)
+
+### DMS to Degrees
+
+### Format Degrees
+
+### Degrees to DMS
+
+### Format DMS
 
 ```{r echo=TRUE, results='hold'}
 DegToDMS(45.39876, 2)
 ```
 
-## Hours and Hours, Minutes, and Seconds
+## Hours, Minutes, and Seconds (HMS)
 
+### Hours to HMS
+
+### Format HMS
+
+### HMS to Hours
 
 ## Degrees and Hours
 
+### Degrees to Hours
+
+### Hours to Degrees
+
+### Hours to DMS
+
+### DMS to Hours
