@@ -118,4 +118,4 @@ $$ {#eq-eclipt2equat2}
 |            | Latitude - b               |              | b $\in$ \[-$\frac{\pi}{2}$, $\frac{\pi}{2}$\]        |
 +------------+----------------------------+--------------+------------------------------------------------------+
 
-: Coordinate Systems {#tbl-coordsys .striped .hover}
+: Coordinate Systems {#tbl-coordsyss .striped .hover}
