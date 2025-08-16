@@ -6,45 +6,93 @@ source("_common.R")
 
 ## Summary
 
+![Conversions between Coordinate Systems](coordsystems.png){#fig-coordsys}
+
 ## Rectangular Coordinates to Polar Coordinates
 
-$x = r \sin \theta \cos \phi$
+$$
+x = r \sin \theta \cos \varphi
+$$ {#eq-rec2polar1}
 
-$y = r \sin \theta \sin \phi$
+$$
+y = r \sin \theta \sin \varphi
+$$ {#eq-rec2polar2}
 
-$z = r \cos \theta$
-
-x = x coordinate, horizontal
-
-y = y coordinate, depth
-
-z = z coordinate, vertical
-
-$\theta$ = vertical
-
-$\phi$ = horizontal
-
-r = radius
+$$
+z = r \cos \theta
+$$ {#eq-rec2polar3}
 
 ## Polar Coordinates to Rectangular Coordinates
 
-$r = \sqrt(x^2 + y^2 + z^2)$
+$$
+r = \sqrt{(x^2 + y^2 + z^2)}
+$$ {#eq-polar2rect1}
 
-$\cos \theta = \frac{x}{r}$
+$$
+\cos \theta = \frac{x}{r}
+$$ {#eq-polar2rect2}
 
-$\cos \phi = \frac{x}{\sqrt(x^2 + y^2)}$
+$$
+\cos \varphi = \frac{x}{\sqrt{(x^2 + y^2)}}
+$$ {#eq-polar2rect3}
 
-$\sin \phi = \frac{y}{\sqrt(x^2 + y^2)}$
+$$
+\sin \varphi = \frac{y}{\sqrt{(x^2 + y^2)}}
+$$ {#eq-polar2rect4}
 
-$\tan \phi = \frac{y}{x}$
+$$
+\tan \varphi = \frac{y}{x}
+$$ {#eq-polar2rect5}
 
-## Equatorial to Ecliptic Transformation
+------------------------------------------------------------------------
 
-## Ecliptic to Equatorial Transformation
+-   $x$ = x coordinate, horizontal
 
-## Equatorial to Horizon Transformation
+-   $y$ = y coordinate, depth
 
-## Horizon to Equatorial Transformation
+-   $z$ = z coordinate, vertical
+
+-   $\theta$ = vertical
+
+-   $\varphi$ = horizontal
+
+-   $r$ = radius
+
+## Equatorial to Ecliptic Conversion
+
+$$
+\tan \lambda = \frac{\sin \alpha \cos \varepsilon + \tan \delta \sin \varepsilon}{\cos \alpha}
+$$ {#eq-equat2eclipt1}
+
+$$
+\sin \beta = \sin \delta \cos \varepsilon - \cos \delta \sin \varepsilon \sin \alpha
+$$ {#eq-equat2eclipt2}
+
+## Ecliptic to Equatorial Conversion
+
+$$
+\tan \alpha = \frac{\sin \lambda \cos \epsilon - \tan \beta \sin \epsilon}{\cos \lambda}
+$$ {#eq-eclipt2equat1}
+
+$$
+\sin \delta = \sin \beta \cos \varepsilon + \cos \beta \sin \varepsilon \sin \lambda
+$$ {#eq-eclipt2equat2}
+
+------------------------------------------------------------------------
+
+-   $\alpha$ = right ascension
+
+-   $\delta$ = declination
+
+-   $\epsilon$ = obliquity of the ecliptic
+
+-   $\lambda$ = ecliptic longitude
+
+-   $\beta$ = ecliptic latitude
+
+## Equatorial to Horizon Conversion
+
+## Horizon to Equatorial Conversion
 
 +------------+----------------------------+--------------+------------------------------------------------------+
 | System     | Coordinates                | Type         | Range                                                |
@@ -71,5 +119,3 @@ $\tan \phi = \frac{y}{x}$
 +------------+----------------------------+--------------+------------------------------------------------------+
 
 : Coordinate Systems {#tbl-coordsys .striped .hover}
-
-See @tbl-coordsys.
