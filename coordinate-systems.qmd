@@ -8,6 +8,96 @@ source("_common.R")
 
 ![Conversions between Coordinate Systems](coordsystems.png){#fig-coordsys}
 
+## Using Rotation Matrices to Transform Coordinates
+
+### Rotation Matrices
+
+$$
+R_x(\theta) =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos\theta & \sin\theta \\
+0 & -\sin\theta & \cos\theta
+\end{bmatrix}
+$$ {#eq-rotmatx}
+
+$$
+R_y(\theta) =
+\begin{bmatrix}
+\cos\theta & 0 & -\sin\theta \\
+0 & 1 & 0 \\
+\sin\theta & 0 & \cos\theta
+\end{bmatrix}
+$$ {#eq-rotmaty}
+
+$$
+R_z(\theta) =
+\begin{bmatrix}
+\cos\theta & \sin\theta & 0 \\
+-\sin\theta & \cos\theta & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$ {#eq-rotmatz}
+
+### Equatorial to Ecliptic Conversion
+
+Equatorial coordinates are given by right ascension $\alpha$ and declination $\delta$.
+
+1. Convert equatorial coordinates $\alpha$ and $\delta$ to cartesian coordinates $x$, $y$, and $z$.
+
+$$
+\begin{bmatrix}
+x_\text{equatorial} \\
+y_\text{equatorial} \\
+z_\text{equatorial}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\cos\delta \cos\alpha \\
+\cos\delta \sin\alpha \\
+\sin\delta
+\end{bmatrix}
+$$ {#eq-equat2eclip1}
+
+2. Apply the rotation matrix $R_x(\theta)$ where the angle of rotation is the obliquity of the ecliptic $\varepsilon$.
+
+$$
+R_x(\varepsilon) =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos\varepsilon & \sin\varepsilon \\
+0 & -\sin\varepsilon & \cos\varepsilon
+\end{bmatrix}
+$$ {#eq-equat2eclip2}
+
+$$
+\begin{bmatrix}
+x_\text{ecliptic} \\
+y_\text{ecliptic} \\
+z_\text{ecliptic}
+\end{bmatrix}
+=
+R_x(\varepsilon)
+\begin{bmatrix}
+x_\text{equatorial} \\
+y_\text{equatorial} \\
+z_\text{equatorial}
+\end{bmatrix}
+$$ {#eq-equat2eclip3}
+
+3. Convert the ecliptic cartesian coordinates to ecliptic longitude $\lambda$ and ecliptic latitude $\beta$.
+
+$$
+\lambda = \arctan\!\left(\frac{y_\text{ecliptic}}{x_\text{ecliptic}}\right)
+$$
+
+$$
+\beta = \arcsin\!\left(\frac{z_\text{ecliptic}}{r}\right)
+$$
+$$
+r = \sqrt{x_\text{ecliptic}^2 + y_\text{ecliptic}^2 + z_\text{ecliptic}^2}
+$$
+
 ## Rectangular Coordinates to Polar Coordinates
 
 $$
@@ -92,7 +182,29 @@ $$ {#eq-eclipt2equat2}
 
 ## Equatorial to Horizon Conversion
 
+$$
+\sin h = \sin \delta \, \sin \phi + \cos \delta \, \cos \phi \, \cos H
+$$
+
+$$
+\cos A = \frac{\sin \delta - \sin \phi \, \sin h}{\cos \phi \, \cos h}
+$$ where
+
+$$
+\ H = LST - \alpha
+$$ {#eq-hor2equat3}
+
 ## Horizon to Equatorial Conversion
+
+$$
+\sin \delta = \sin h \cos \phi + \cos h \cos \phi \cos A
+$$ {#eq-hor2equat1}
+
+$$
+\cos H = \frac{\sin h - \sin \phi \, \sin \delta}{\cos \phi \, \cos \delta}
+$$ {#eq-hor2equat2}
+
+------------------------------------------------------------------------
 
 +------------+----------------------------+--------------+------------------------------------------------------+
 | System     | Coordinates                | Type         | Range                                                |
