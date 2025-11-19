@@ -176,6 +176,13 @@ CreateDE441DE440Database <- function()
   table_name <- "DE440Nutation"
   dbWriteTable(con, table_name, nutation)
   
+  # Read data for the Julian Day Numbers
+  jdn <- arrow::read_parquet(here("data", "processed", "JulianDayNumber", "JulianDayNumber.parquet"))
+  
+  # Write data for the Julian Day Numbers
+  table_name <- "JulianDayNumber"
+  dbWriteTable(con, table_name, jdn)
+  
   # Shutdown database
   dbDisconnect(con, shutdown = TRUE)
 }

@@ -14,6 +14,7 @@ library(lutz)
 library(lubridate)
 library(kableExtra)
 library(magrittr)
+library(data.table)
 
 # Mathematical and ephemeris constants used by the various functions
 source(here("src", "R", "Ephemeris", "constants.R"))
@@ -127,5 +128,5 @@ source(here("src", "R", "Ephemeris", "Time.R"))
 # Functions to calculate coordinate transformations
 source(here("src", "R", "Ephemeris", "Coordinate.R"))
 
-source(here("src", "R", "Ephemeris", "JulianDayNumbernew.R"))
+source(here("src", "R", "Ephemeris", "JulianDayNumber.R"))
 
