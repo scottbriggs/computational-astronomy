@@ -1,4 +1,3 @@
-
 # Libraries used by the various functions
 library(logger)
 library(arrow)
@@ -49,7 +48,12 @@ source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Neptune.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Pluto.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Moon.R"))
 source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Sun.R"))
-source(here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Nutation.R"))
+source(here(
+  "src",
+  "R",
+  "ProcessDE441ParquetData",
+  "BuildMasterDE441Nutation.R"
+))
 
 # Function to used the NASA API calculate the julian day number
 source(here("src", "R", "Ephemeris", "CreateJulianDayNumberTable.R"))
@@ -108,7 +112,12 @@ source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Neptune.R"))
 source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Pluto.R"))
 source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Moon.R"))
 source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Sun.R"))
-source(here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Nutation.R"))
+source(here(
+  "src",
+  "R",
+  "ProcessDE440ParquetData",
+  "BuildMasterDE440Nutation.R"
+))
 
 # Functions for various math operations
 source(here("src", "R", "Ephemeris", "MathConversions.R"))
@@ -128,5 +137,8 @@ source(here("src", "R", "Ephemeris", "Time.R"))
 # Functions to calculate coordinate transformations
 source(here("src", "R", "Ephemeris", "Coordinate.R"))
 
+# Functions to create a database of julian day numbers and calendar dates
 source(here("src", "R", "Ephemeris", "JulianDayNumber.R"))
 
+# Functions to read and parse DE441 ascii files
+source(here("src", "R", "Ephemeris", "ProcessDE441ASCIIFiles.R"))

@@ -1,16 +1,15 @@
-
 # Mathematical Constants
 PI <- 3.14159265358979
-PI2 <- 2*PI
+PI2 <- 2 * PI
 
 # Radians to degrees
-RAD2DEG <- 180/PI
+RAD2DEG <- 180 / PI
 
 # Degrees to radians
-DEG2RAD <- PI/180
+DEG2RAD <- PI / 180
 
 # Radians to hours
-RAD2HR <- 12/PI
+RAD2HR <- 12 / PI
 
 # Arcseconds to radians
 ARCSEC2RAD <- 4.848136811095359935899141E-6
@@ -22,10 +21,10 @@ RAD2ARCSEC <- 206264.79821012
 SECDAY <- 86400
 
 # Hours to radians
-HR2RAD <- PI/12
+HR2RAD <- PI / 12
 
 # Radians to hours
-RAD2HR <- 12/PI
+RAD2HR <- 12 / PI
 
 # Astronomical Constants
 
@@ -60,7 +59,7 @@ EARTHRADKM <- EARTHRADM / 1000
 EARTHRADAU <- EARTHRADM / 1000 / KM2AU
 
 # Flattening of the Earth's reference ellipsoid (IAU 1976)
-FLAT <- 1/298.257
+FLAT <- 1 / 298.257
 
 # Julian day for J2000
 EPOCHJ2000 <- 2451545.0
@@ -71,10 +70,32 @@ DAYSJULCENT <- 36525
 # Rotational angular velocity of the Earth in radians/second
 ROTANGVELEARTH <- 7.29211511467e-5
 
-MONTHSTR <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-                 "Sep", "Oct", "Nov", "Dec")
+MONTHNAMES <- c(
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+)
 
-WEEKSTR <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+WEEKDAYNAMES <- c(
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+)
+
+GREGORIANREFORMJDN <- 2299161
 
 # DE441 Constants
 DE441STARTEPOCH <- -3100015.5 # Start Epoch

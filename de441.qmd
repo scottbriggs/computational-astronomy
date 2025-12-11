@@ -14,7 +14,7 @@ The JPL Development Ephemeris 441 (DE441) provides accurate data on the position
 ## DE441 Files and File Structure
 
 | Name | Reference | Units | Coordinates | Coefficients | Subintervals |
-|:-----------|------------|------------|-------------|------------|------------|
+|:-----------|------------|------------|------------|------------|------------|
 | Mercury | SSB | km | x, y, z | 14 | 4 |
 | Venus | SSB | km | x, y, z | 10 | 2 |
 | EMB | SSB | km | x, y, z | 13 | 2 |
@@ -26,7 +26,7 @@ The JPL Development Ephemeris 441 (DE441) provides accurate data on the position
 | Pluto | SSB | km | x, y, z | 6 | 1 |
 | Moon | Earth | km | x, y, z | 13 | 8 |
 | Sun | SSB | km | x, y, z | 11 | 2 |
-| Nutations |  | radians | $\Delta$$\psi$, $\Delta$$\epsilon$ | 0 | 0 |
+| Nutations |  | radians | $\Delta$\psi\$\$, $\Delta$\epsilon\$\$ | 0 | 0 |
 | Lunar Mantle Librations |  | radians | $\phi$, $\theta$, $\psi$ | 10 | 4 |
 | Lunar Mantle Angular Velocity |  | radians per day | $\omega_x$, $\omega_y$, $\omega_z$ | 0 | 0 |
 | TT-TDB |  | seconds |  | 0 | 0 |
