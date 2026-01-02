@@ -1,103 +1,122 @@
-# Function to parse DE441 header.441 file
-ParseDE441Header <- function(header_file) {
-  cat("Parsing header file:", header_file, "\n\n")
+# Functions to parse the DE441 ASCII files, extract the body coefficients,
+# and create a database of julian day numbers and body coefficients
 
-  lines <- readLines(header_file)
+# Query the database for the coefficient pointer data
+GetDE441CoefficientPointers <- function() {
+  con <- dbConnect(duckdb(dbdir=here("data", "database", "de441.duckdb")))
   
-  # Read header
-  header <- data.table(
-    lines[5],
-    lines[6],
-    lines[7]
-  )
+  body_coeff <- dbGetQuery(con, "select * from DE441Coefficients")
   
-  setnames(header, c("Ephemeris", "Epoch Start", "Epoch End"))
+  DBI::dbDisconnect(con, shutdown = TRUE)
   
-  header# Read Start Epoch, End Epoch, and Record Span
-  str_split <- strsplit(lines[11], split = "\\s+")
-  extracted_columns <- unlist(str_split)
-  start_jd <- as.numeric(extracted_columns[2])
-  end_jd <- as.numeric(extracted_columns[3])
-  record_span_days <- as.numeric(extracted_columns[4])
-  
-  epoch <- data.table(
-    start_jd,
-    end_jd,
-    record_span_days
-  )
-
-  setnames(epoch, c("Epoch Start Julian Day Number", "Epoch End Julian Day Number",
-                    "Record Span Days"))
-  
-  # Read Constant Names
-  const_lines <- lines[16:80]
-  const_names <- unlist(str_extract_all(paste(const_lines, collapse = " "), "\\S+"))
-  
-  # Read Constant Values
-  ncon_lines <- lines[85:299]
-  val_text <- str_replace_all(ncon_lines, "D", "E")
-  constants <- as.numeric(unlist(str_extract_all(paste(val_text, collapse = " "), "\\S+")))
-  
-  # Read Chebyshev coefficient pointers, number of coefficients, and number of
-  # intervals for each body
-  cheby <- lines[303]
-  chebyshev_coeff_ptr <- as.integer(unlist(str_extract_all(paste(cheby, collapse = " "), "\\S+")))
-  
-  coeff <- lines[304]
-  ncoeff <- as.integer(unlist(str_extract_all(paste(coeff, collapse = " "), "\\S+")))
-  
-  interval <- lines[305]
-  ninterval <- as.integer(unlist(str_extract_all(paste(interval, collapse = " "), "\\S+")))
-  
-  # Create data table for the constant names and values
-  const <- data.table(
-    const_names,
-    constants
-  )
-  
-  # Column names for the constants
-  setnames(const, c("Constant Names", "Values"))
-  
-  # Bodies found in the header file
-  body <- c("Mercury", "Venus", "Earth-Moon Barycenter", "Mars", "Jupiter",
-            "Saturn", "Uranus", "Neptune", "Pluto", "Moon", "Sun",
-            "Nutation", "Lunar Mantle Libration", "Lunar Mantle Angular Velocity",
-            "TT-TDB")
-  
-  # Create data table for the body coefficients
-  dt <- data.table(
-    body,
-    chebyshev_coeff_ptr,
-    ncoeff,
-    ninterval
-  )
-  
-  # Column names for the coefficients
-  setnames(dt, c("Body", "Chebyshev Coeff Ptr", "Number Of Coeff", "Number Of Intervals"))
-  
-  header_data <- list()
-  header_data$header <- header
-  header_data$epoch <- epoch
-  header_data$const <- const
-  header_data$coeff <- dt
-  
-  header_data
+  return (body_coeff)
 }
 
-CreateDE441HeaderDatabase <- function(header_file) {
+# Extract all records from the ASCII file
+ExtractDE441ASCIIRecords <- function(filename) {
+  de441_file <- readLines(filename)
   
-  # Get header data
-  header_data <- ParseDE441Header(header_file)
+  record_starts <- which(str_detect(de441_file, "^\\s*\\d+\\s+\\d+"))
   
-  # Connect to DE441 database
-  con <- DBI::dbConnect(duckdb(
-    dbdir = here::here("data", "database", "de441.duckdb")
-  ))
+  records <- list()
   
-  # Write data for the header rows
-  table_name <- "DE441Header"
-  DBI::dbWriteTable(con, table_name, header_data$header)
+  for (i in seq_along(record_starts)) {
+    start_idx <- record_starts[i]
+    
+    # Determine end of this record
+    if (i < length(record_starts)) {
+      end_idx <- record_starts[i + 1] - 1
+    } else {
+      end_idx <- length(de441_file)
+    }
+    
+    # Parse record header (record number and coefficient count)
+    header_line <- str_trim(de441_file[start_idx])
+    header_vals <- as.integer(unlist(str_extract_all(header_line, "\\d+")))
+    record_num <- header_vals[1]
+    n_coeff <- header_vals[2]
+    
+    # Extract coefficient lines
+    coeff_lines <- de441_file[(start_idx + 1):end_idx]
+    coeff_lines <- coeff_lines[nchar(str_trim(coeff_lines)) > 0]
+    
+    # Parse all coefficients
+    coeff_text <- paste(coeff_lines, collapse = " ")
+    # Handle Fortran D notation
+    coeff_text <- str_replace_all(coeff_text, "D", "E")
+    
+    # Extract all numeric values
+    coefficients <- as.numeric(unlist(str_extract_all(coeff_text, 
+                                                      "[+-]?\\d+\\.\\d+E?[+-]?\\d*")))
+    
+    # First two values are the time range for this record
+    start_jd <- coefficients[1]
+    end_jd <- coefficients[2]
+    
+    # Remaining values are Chebyshev coefficients
+    chebyshev_coeffs <- coefficients[3:length(coefficients)]
+    
+    records[[i]] <- list(
+      record_num = record_num,
+      start_jd = start_jd,
+      end_jd = end_jd,
+      coefficients = chebyshev_coeffs
+    )
+  }
+    return(records)
+}
+
+# Extract the chebyshev coefficients from a record in the ASCII file
+ExtractDE441BodyCoefficients <- function(record, body_name, body_coeff) {
+  coeff_info_df <- as.data.frame(body_coeff)
+  coeff_info <- filter(coeff_info_df, Body == body_name)
+  offset <- as.numeric(coeff_info[2])
+  n_coeffs <- as.numeric(coeff_info[3])
+  n_sets <- as.numeric(coeff_info[4])
   
+  start_idx <- offset - 2
+  coeffs_per_set <- n_coeffs * 3
+  total_coeffs <- coeffs_per_set * n_sets
+  end_idx <- start_idx + total_coeffs - 1
+  
+  tmp <- c(record$coefficients)
+  coeffs <- tmp[start_idx:end_idx]
+  coeff_matrix <- matrix(coeffs, nrow = n_sets, byrow = TRUE)
+  
+  result <- list(
+    body = body_name,
+    start_jd = record$start_jd,
+    end_jd = record$end_jd,
+    n_sets = n_sets,
+    n_coefficients = n_coeffs,
+    coefficients = coeff_matrix
+  )
+  
+  return(result)
+}
+
+# Extract the chebyshev coefficients for all solar system bodies and
+# and write each body out as a parquet file for each ascii file
+ExtractSolarSystemBodies <- function(filename) {
+  
+  # Get the coefficient pointers
+  coef_ptr <- GetDE441CoefficientPointers()
+  
+  # Get all the records for the ascii file
+  asciiFile <- ExtractDE441ASCIIRecords(filename)
+  
+  # Get the number of records in the ascii file
+  numOfRecords <- length(asciiFile)
+  
+  # Loop across all records for Mercury and extract the coefficients
+  mercuryList <- list()
+  
+  for (i in 1:numOfRecords) {
+    result <- ExtractDE441BodyCoefficients(asciiFile[[i]], "Mercury", coef_ptr)
+    mercuryList[[i]] <- result
+  }
+  
+  return (mercuryList)
   
 }
 

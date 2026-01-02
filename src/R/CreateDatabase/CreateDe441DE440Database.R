@@ -1,8 +1,8 @@
 
-CreateDE441DE440Database <- function()
+CreateDE441Database <- function()
 {
   #Create database for the DE441 data
-  con <- dbConnect(duckdb(dbdir=here("data", "database", "de441_de440.duckdb")))
+  con <- dbConnect(duckdb(dbdir=here("data", "database", "de441.duckdb")))
   
   # Add tables for the DE441 solar system bodies
   # Read data for Mercury
@@ -89,7 +89,21 @@ CreateDE441DE440Database <- function()
   table_name <- "DE441Nutation"
   dbWriteTable(con, table_name, nutation)
   
-  # DE440
+  # Read data for the Julian Day Numbers
+  jdn <- arrow::read_parquet(here("data", "processed", "JulianDayNumber", "JulianDayNumber.parquet"))
+  
+  # Write data for the Julian Day Numbers
+  table_name <- "JulianDayNumber"
+  dbWriteTable(con, table_name, jdn)
+  
+  # Shutdown database
+  dbDisconnect(con, shutdown = TRUE)
+}
+
+CreateDE440Database <- function() {
+  
+  #Create database for the DE440 data
+  con <- dbConnect(duckdb(dbdir=here("data", "database", "de440.duckdb")))
   
   # Add tables for the DE440 solar system bodies
   # Read data for Mercury
@@ -152,7 +166,7 @@ CreateDE441DE440Database <- function()
   pluto <- arrow::read_parquet(here("data", "processed", "de440", "Pluto", "PlutoMasterDE440.parquet"))
   
   # Write data for Pluto
-  table_name <- "DE440Pluto"
+  table_name <- "DE441Pluto"
   dbWriteTable(con, table_name, pluto)
   
   # Read data for the Moon
