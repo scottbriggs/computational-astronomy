@@ -29,8 +29,9 @@ csl: turabian-author-date.csl
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
+      light: [flatly, computational-astronomy.scss]
+      dark: [darkly, computational-astronomy.scss]
+    respect-user-color-scheme: true
     code-link: true
 
     author-meta: "Scott Briggs"

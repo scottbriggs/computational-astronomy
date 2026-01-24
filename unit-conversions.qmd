@@ -1,5 +1,5 @@
 # Unit Conversions
-
+***
 ```{r include = FALSE}
 source("_common.R")
 ```
@@ -12,6 +12,4 @@ DegToDMS(45.39876, 2)
 
 ## Hours and Hours, Minutes, and Seconds
 
-
 ## Degrees and Hours
-

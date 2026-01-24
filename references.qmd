@@ -1,7 +1,11 @@
-
 # References
+***
+```{r include = FALSE}
+source("_common.R")
+```
 
 ---
 nocite: |
   @*
 ---
+

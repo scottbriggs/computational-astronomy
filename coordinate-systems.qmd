@@ -1,5 +1,5 @@
 # Coordinate Systems
-
+***
 ```{r include = FALSE}
 source("_common.R")
 ```
@@ -12,36 +12,68 @@ source("_common.R")
 
 ## Equatorial to Ecliptic Transformation
 
+$\mathsf{sin\, \beta = sin\, \delta\, cos\, \varepsilon + cos\, \delta\, sin\, \varepsilon\, sin\, \alpha}$
+
+$\mathsf{tan\, \lambda = \dfrac{sin\, \alpha\, cos\, \varepsilon - tan\, \delta\, sin\, \varepsilon}{cos\, \alpha}}$
+
+:::{.callout-note}
+This is an example of a note callout
+:::
+
 ## Ecliptic to Equatorial Transformation
+
+$\mathsf{sin\, \delta = sin\, \beta\, cos\, \varepsilon + cos\, \beta\, sin\, \varepsilon\, sin\, \lambda}$
+
+$\mathsf{tan\, \alpha = \dfrac{sin\, \lambda\, cos\, \varepsilon - tan\, \beta\, sin\, \varepsilon}{cos\, \lambda}}$
 
 ## Equatorial to Horizon Transformation
 
+$\mathsf{sin\, h = sin\, \delta\, sin\, \phi + cos\, \delta\, cos\, \phi\, cos\, H}$
+
+$\mathsf{cos\, A = \dfrac{sin\, \delta - sin\, \phi\, sin\, h}{cos\, \phi\, cos\, h}}$
+
 ## Horizon to Equatorial Transformation
 
-+------------+----------------------------+--------------+------------------------------------------------------+
-| System     | Coordinates                | Type         | Range                                                |
-+============+============================+==============+======================================================+
-| Equatorial | Right Ascension - $\alpha$ | Geocentric   | $\alpha$ $\in$ \[0, 2$\pi$\]                         |
-|            |                            |              |                                                      |
-|            | Declination - $\delta$     |              | $\delta$ $\in$ \[-$\frac{\pi}{2}$, $\frac{\pi}{2}$\] |
-+------------+----------------------------+--------------+------------------------------------------------------+
-| Equatorial | Hour Angle - H             | Topocentric  | H $\in$ \[0, 2$\pi$\]                                |
-|            |                            |              |                                                      |
-|            | Declination - $\delta$     |              | $\delta$ $\in$ \[-$\frac{\pi}{2}$, $\frac{\pi}{2}$\] |
-+------------+----------------------------+--------------+------------------------------------------------------+
-| Horizon    | Azimuth - A                | Topocentric  | A $\in$ \[0, 2$\pi$\]                                |
-|            |                            |              |                                                      |
-|            | Altitude - h               |              | h $\in$ \[-$\frac{\pi}{2}$, $\frac{\pi}{2}$\]        |
-+------------+----------------------------+--------------+------------------------------------------------------+
-| Ecliptic   | Longitude - $\lambda$      | Geocentric   | $\lambda$ $\in$ \[0, 2$\pi$\]                        |
-|            |                            |              |                                                      |
-|            | Latitude - $\beta$         |              | $\beta$ $\in$ \[-$\frac{\pi}{2}$, $\frac{\pi}{2}$\]  |
-+------------+----------------------------+--------------+------------------------------------------------------+
-| Ecliptic   | Longitude - l              | Heliocentric | l $\in$ \[0, 2$\pi$\]                                |
-|            |                            |              |                                                      |
-|            | Latitude - b               |              | b $\in$ \[-$\frac{\pi}{2}$, $\frac{\pi}{2}$\]        |
-+------------+----------------------------+--------------+------------------------------------------------------+
+$\mathsf{sin\, \delta = sin\, h\, sin\, \phi + cos\, h\, cos\, \phi\, cos\, A}$
 
+$\mathsf{cos\, H = \dfrac{sin\, h - sin\, \phi\, sin\, \delta}{cos\, \phi\, cos\, \delta}}$
+
+## Equatorial to Galatic Transformation
+
+$\mathsf{sin\, b = cos\, \delta\, cos\, \delta_0\, cos(\alpha-\alpha_0) + sin\, \delta\, sin\, \delta_0}$
+
+$\mathsf{tan\, l = \dfrac{sin\, \delta - sin\, b\, sin\, \delta_0}{cos\, \delta\, sin(\alpha-\alpha_0)\, cos\, \delta_0} + N_0}$
+
+## Galatic to Equatorial Transformation
+
+$\mathsf{sin\, \delta = cos\, b\, cos\, \delta_0\, sin(l - N_0) + sin\, b\, sin\, \delta_0}$
+
+$\mathsf{tan\, \alpha = \dfrac{cos\, b\, cos(l - N_0)}{sin\, b\, cos\, \delta_0 - cos\, b\, sin\, \delta_0\, sin(l - N_0)} + \alpha_0}$
+
+## Coordinate Systems
++------------+----------------------------+---------------+-----------------------------------------------------------------+
+| System     | Coordinates                | Type          | Range                                                           |
++:===========+:===========================+:==============+:================================================================+
+| Equatorial | Right Ascension - $\alpha$ | Geocentric    | $\alpha\, \in\, [0, 2\,\pi]$                                    |
+|            |                            |               |                                                                 |
+|            | Declination - $\delta$     |               | $\delta\, \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$     |
++------------+----------------------------+---------------+-----------------------------------------------------------------+
+| Equatorial | Hour Angle - H             | Topocentric   | $\mathsf{H\,} \in\, [0, 2\, \pi]$                               |
+|            |                            |               |                                                                 |
+|            | Declination - $\delta$     |               | $\delta\, \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$     |
++------------+----------------------------+---------------+-----------------------------------------------------------------+
+| Horizon    | Azimuth - A                | Topocentric   | $\mathsf{A\,} \in\, [0, 2\, \pi]$                               |
+|            |                            |               |                                                                 |
+|            | Altitude - h               |               | $\mathsf{h\,} \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$ |
++------------+----------------------------+---------------+-----------------------------------------------------------------+
+| Ecliptic   | Longitude - $\lambda$      | Heliocentric, | $\lambda\, \in\, [0, 2\,\pi]$                                   |
+|            |                            | Geocentric    |                                                                 |
+|            | Latitude - $\beta$         |               | $\beta\, \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$      |
++------------+----------------------------+---------------+-----------------------------------------------------------------+
+| Galactic   | Longitude - l              | Heliocentric  | $\mathsf{l\,} \in\, [0, 2\,\pi]$                                |
+|            |                            |               |                                                                 |
+|            | Latitude - b               |               | $\mathsf{b\,} \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$ |
++------------+----------------------------+---------------+-----------------------------------------------------------------+
 : Coordinate Systems {#tbl-coordsys .striped .hover}
 
 See @tbl-coordsys.
