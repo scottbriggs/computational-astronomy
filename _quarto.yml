@@ -29,8 +29,8 @@ csl: turabian-author-date.csl
 format:
   html:
     theme:
-      light: [flatly, computational-astronomy.scss]
-      dark: [darkly, computational-astronomy.scss]
+      light: [flatly, computational-astronomy-flatly.scss]
+      dark: [darkly, computational-astronomy-darkly.scss]
     respect-user-color-scheme: true
     code-link: true
 

@@ -1,5 +1,7 @@
 # Mathematical Necessities
+
 ***
+
 ```{r include = FALSE}
 source("_common.R")
 ```
