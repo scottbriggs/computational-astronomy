@@ -1,6 +1,6 @@
 # Mathematical Necessities
 
-***
+------------------------------------------------------------------------
 
 ```{r include = FALSE}
 source("_common.R")
@@ -10,12 +10,29 @@ source("_common.R")
 
 ### Dot product
 
+$\mathbf{a} \cdot \mathbf{b} = (a_x, a_y, a_z) \cdot (b_x, b_y, b_z) = a_x b_x + a_y b_y + a_z b_z$
+
 ### Cross Product
 
-### Vector Normal
+$\mathbf{a} \times \mathbf{b} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ a_x & a_y & a_z \\ b_x & b_y & b_z \end{vmatrix} = \begin{pmatrix} a_y b_z - a_z b_y \\ a_z b_x - a_x b_z \\ a_x b_y - a_y b_x \end{pmatrix}$
+
+### Vector Norm
+
+$\|\vec{v}\| = \sqrt{v_x^2 + v_y^2 + v_z^2}$
 
 ### Unit Vectors
+
+$\hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} = \left(\frac{v_x}{\|\mathbf{v}\|}, \frac{v_y}{\|\mathbf{v}\|}, \frac{v_z}{\|\mathbf{v}\|}\right)$
+
+## Rotation Matrices
+
+$R_x(\phi) = \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\, \phi & -sin\, \phi \\ 0 & sin\, \phi & cos\, \phi \end{bmatrix}$
+
+$R_y(\phi) = \begin{bmatrix} cos\, \phi & 0 & sin\, \phi \\ 0 & 1 & 0 \\ -sin\, \phi & 0 & cos\, \phi \end{bmatrix}$
+
+$R_z(\phi) = \begin{bmatrix} cos\, \phi\, & -sin\, \phi & 0 \\ sin\, \phi & cos\, \phi\, & 0 \\ 0 & 0 & 1 \end{bmatrix}$
 
 ## Matrix Multiplication
 
 ## Interpolation
+
