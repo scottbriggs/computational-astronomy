@@ -1,14 +1,20 @@
 # Unit Conversions
-***
+
+------------------------------------------------------------------------
+
 ```{r include = FALSE}
 source("_common.R")
 ```
 
-## Degrees and Degrees, Arcminutes, and Arcseconds
 
-```{r echo=TRUE, results='hold'}
-DegToDMS(45.39876, 2)
-```
+| Unit of Time                | Equivalent Angle       | Angle                | Equivalent Time      |
+|-----------------------------|------------------------|----------------------|----------------------|
+| $\mathsf{24^{h}\, (1 day)}$ | $\mathsf{360^{\circ}}$ | 1 radian             | $\mathsf{3.82^{h}}$  |
+| $\mathsf{1^{h}}$            | $\mathsf{15^{\circ}}$  | $\mathsf{1^{\circ}}$ | $\mathsf{4^{m}}$     |
+| $\mathsf{1^{m}}$            | $\mathsf{15^{'}}$      | $\mathsf{1^{'}}$     | $\mathsf{4^{s}}$     |
+| $\mathsf{1^{s}}$            | $\mathsf{15^{''}}$     | $\mathsf{1^{''}}$    | $\mathsf{0.067^{s}}$ |
+
+## Degrees and Degrees, Arcminutes, and Arcseconds
 
 ## Hours and Hours, Minutes, and Seconds
 

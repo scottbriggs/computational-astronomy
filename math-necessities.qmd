@@ -34,5 +34,7 @@ $R_z(\phi) = \begin{bmatrix} cos\, \phi\, & -sin\, \phi & 0 \\ sin\, \phi & cos\
 
 ## Matrix Multiplication
 
+To perform matrix multiplication in R, use the operator %*%.
+
 ## Interpolation
 
