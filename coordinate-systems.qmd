@@ -8,7 +8,6 @@ source("_common.R")
 
 ## Summary
 
-
 ## Cartesian Coordinates to Spherical Coordinates
 
 $\mathsf{r = \sqrt(x^2 + y^2 + z^2)}$

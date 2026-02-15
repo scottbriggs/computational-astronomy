@@ -14,12 +14,12 @@ book:
   
   chapters:
     - index.qmd
-    #- preface.qmd
-    #- intro.qmd
+    - intro.qmd
     - math-necessities.qmd
     - unit-conversions.qmd
     - time-conversions.qmd
     - coordinate-systems.qmd
+    - position_reductions.qmd
     - de441.qmd
     - references.qmd
 

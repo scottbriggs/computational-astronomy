@@ -15,6 +15,8 @@ library(lubridate)
 library(kableExtra)
 library(magrittr)
 library(data.table)
+library(purrr)
+library(readr)
 
 # Mathematical and ephemeris constants used by the various functions
 source(here::here("src", "R", "Ephemeris", "constants.R"))

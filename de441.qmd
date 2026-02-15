@@ -1,6 +1,6 @@
 ## JPL DE441 Ephemeris
 
-***
+------------------------------------------------------------------------
 
 ```{r include = FALSE}
 source("_common.R")
@@ -16,7 +16,7 @@ The JPL Development Ephemeris 441 (DE441) provides accurate data on the position
 ## DE441 Files and File Structure
 
 | Name | Reference | Units | Coordinates | Coefficients | Subintervals |
-|:-----------|------------|------------|------------|------------|------------|
+|:---|----|----|----|----|----|
 | Mercury | SSB | km | x, y, z | 14 | 4 |
 | Venus | SSB | km | x, y, z | 10 | 2 |
 | EMB | SSB | km | x, y, z | 13 | 2 |

@@ -1,0 +1,15 @@
+# Introduction
+
+------------------------------------------------------------------------
+
+```{r include = FALSE}
+source("_common.R")
+```
+
+## Computational Astronomy
+
+## Benefits of Using R and R Studio
+
+## DE441 Ephemeris
+
+## DuckDB Database

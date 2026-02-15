@@ -1,0 +1,71 @@
+# Position Reductions of Celestial Objects
+
+------------------------------------------------------------------------
+
+```{r include = FALSE}
+source("_common.R")
+```
+
+## Introduction
+
+## Place
+
+### Mean Place
+
+The mean place is defined by the planet's barycentric (referred to the solar system barycenter) equatorial rectangular (x, y, z) coordinates. The mean place is referred to the mean equator and equinox of J2000.0.
+
+### Apparent Place
+
+### Topocentric Place
+
+### Virtual Place
+
+### Local Place
+
+### Astrometric Place
+
+## Position Reductions
+
+### Light Time
+
+### Light Deflection
+
+### Abberation of Light
+
+### Precession
+
+### Nutation
+
+## Calculating the Apparent Place of Planets
+
+The algorithm used to compute the apparent place of a planet at an epoch of observation $\, t'$, given its ephemeris with origin at the solar-system barycenter and its coordinates referred to the Earth's mean equator and equinox of a reference eopch $\, t_0$, is represented by:
+
+$\mathsf{\mathbf{u}_4(t') = \mathbf{N}(t) \, \mathbf{P}(t) \, f \, [ \, g\, [ \, \mathbf{u}_B(t - \tau) - \mathbf{E}_B(t) \,] \,]}$
+
+where
+
+$t' \,$ is the epoch of observation in the TDT timescale;
+
+$t \,$ is the epoch of observation in the TDB timescale;
+
+$t_0 \,$ is the reference epoch to which the ephemeris is referred, e.g. J2000.0;
+
+$\tau \,$ is the light travel time from the planet to the Earth in the TDB timescale, for light arriving at the epoch of observation $\, t \,$;
+
+$\mathbf{u}_B(t - \tau) \,$ is the barycentric position of the planet at epoch $\, t - \tau \,$, referred to the mean equator and equinox of $\, t_0 \,$;
+
+$\mathbf{E}_B(t) \,$ is the barycentric position of the Earth at the epoch of observation $\, t \,$, referred to the mean equator and equinox;
+
+$g\, [\dots] \,$ is the function representing the gravitational deflection of light;
+
+$f\, [\dots] \,$ is the function representing the abberation of light
+
+$\mathbf{P}(t) \,$ is the precession matrix, a rotation from the mean equinox and equator to the true equinox and equator of observation $\, t \,$;
+
+$\mathbf{N}(t) \,$ is the nutation matrix, a rotation from the mean equinox and equator to the true equinox and equator of date $\, t \,$;
+
+$\mathbf{u}_4(t') \,$ is the apparent geocentric place of the planet at the epoch of observation $\, t'$ represented as a three dimensional position vector (x, y, z) and referred to the true equinox and equator of observation
+
+## Calculating the Topocentric Place of Planets
+
+## Calculating the Apparent Place of Stars
