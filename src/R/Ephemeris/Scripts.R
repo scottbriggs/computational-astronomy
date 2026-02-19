@@ -51,12 +51,6 @@ source(here::here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Neptun
 source(here::here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Pluto.R"))
 source(here::here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Moon.R"))
 source(here::here("src", "R", "ProcessDE441ParquetData", "BuildMasterDE441Sun.R"))
-source(here::here(
-  "src",
-  "R",
-  "ProcessDE441ParquetData",
-  "BuildMasterDE441Nutation.R"
-))
 
 # Function to used the NASA API calculate the julian day number
 source(here::here("src", "R", "Ephemeris", "CreateJulianDayNumberTable.R"))
