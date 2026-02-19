@@ -18,11 +18,11 @@ This book will use the R language and the R Studio Integrated Development Enviro
 
 ## DE441 Ephemeris
 
-
-
 ## DuckDB Database
 
 DuckDB is a high-performance, open-source, embedded analytical database (DuckDB). Its primary benefits lie in its simplicity, speed for analytical workloads, and seamless integration with data science tools and various file formats.
+
+
 
 Key benefits of using DuckDB include:
 
