@@ -115,18 +115,15 @@ source(here::here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Neptun
 source(here::here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Pluto.R"))
 source(here::here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Moon.R"))
 source(here::here("src", "R", "ProcessDE440ParquetData", "BuildMasterDE440Sun.R"))
-source(here::here(
-  "src",
-  "R",
-  "ProcessDE440ParquetData",
-  "BuildMasterDE440Nutation.R"
-))
 
 # Functions for various math operations
 source(here::here("src", "R", "Ephemeris", "MathConversions.R"))
 
 # Functions to calculate precession
 source(here::here("src", "R", "Ephemeris", "Precession.R"))
+
+# Functions to calculate Nutation
+source(here::here("src", "R", "Ephemeris", "Nutation.R"))
 
 # Functions to calculate the apparent place of solar system bodies
 source(here::here("src", "R", "Ephemeris", "ApparentPlace.R"))
