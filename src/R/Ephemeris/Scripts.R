@@ -77,8 +77,6 @@ source(here::here("src", "R", "DE441SolarSystemPosVel", "PositionNeptuneSSB.R"))
 source(here::here("src", "R", "DE441SolarSystemPosVel", "PositionPlutoSSB.R"))
 source(here::here("src", "R", "DE441SolarSystemPosVel", "PositionMoonGEO.R"))
 source(here::here("src", "R", "DE441SolarSystemPosVel", "PositionSunSSB.R"))
-source(here::here("src", "R", "DE441SolarSystemPosVel", "Nutation.R"))
-
 
 # Functions used to process the DE440 ephemeris raw files
 source(here::here("src", "R", "ProcessRawDE440Data", "ProcessDE440RawData.R"))
