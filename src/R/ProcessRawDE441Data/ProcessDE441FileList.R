@@ -5,7 +5,7 @@
 CreateDE441FileList <- function()
 {
   # Read DE441 file list
-  de441Files <- list.files(path = here("data", "raw", "de441"), pattern='\\.441')
+  de441Files <- list.files(path = here:here("data", "raw", "de441"), pattern='\\.441')
   
   # Drop files that are not DE441 data files
   de441Files <- de441Files[-c(31, 32)]
@@ -16,7 +16,7 @@ CreateDE441FileList <- function()
   # Read the DE441 files and determine number of lines in each file
   de441FileLength <- rep(0, numDE441Files)
   for (i in 1:numDE441Files) {
-    ascii_data <- readLines(de441Files[i], n=-1)
+    ascii_data <- readLines(here::here("data", "raw", "de441", de441Files[i]), n=-1)
     de441FileLength[i] <- length(ascii_data)
   }
   
@@ -30,9 +30,19 @@ CreateDE441FileList <- function()
   # Create data frame for the files and file sizes
   tmp <- data.frame(de441Files, de441Blocks, de441FileLength)
   
-  # Write the files and file sizes to an excel file
-  write_xlsx(tmp, here("data", "raw", "de441", "DE441FileSize.xlsx"), col_names = TRUE)
-}
+  # Write data to a parquet file
+  parquet_file <- arrow::write_parquet(tmp, here::here("data", "processed", "de441", "de441ASCIIFiles.parquet"))
+  
+  #Create database table for the DE441 files
+  con <- dbConnect(duckdb(), dbdir=here::here("data", "database", "de441.duckdb"))
+  
+  # Write data for de441 ASCII Files
+  table_name <- "DE441Files"
+  dbWriteTable(con, table_name, parquet_file)
+  
+  # Shutdown database
+  dbDisconnect(con, shutdown = TRUE)
+}  
 
 
 

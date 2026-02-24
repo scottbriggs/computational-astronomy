@@ -1,22 +1,3 @@
-# Libraries used by the various functions
-library(logger)
-library(arrow)
-library(writexl)
-library(readxl)
-library(dplyr)
-library(stringi)
-library(stringr)
-library(httr)
-library(jsonlite)
-library(duckdb)
-library(tidygeocoder)
-library(lutz)
-library(lubridate)
-library(kableExtra)
-library(magrittr)
-library(data.table)
-library(purrr)
-library(readr)
 
 # Mathematical and ephemeris constants used by the various functions
 source(here::here("src", "R", "Ephemeris", "constants.R"))

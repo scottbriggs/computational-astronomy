@@ -1,7 +1,6 @@
+# Calculate the unit vector for the pole of the ecliptic
+EclipticPole <- function(jd) {
 
-# Calculate the precession matrix
-PrecessionMatrix <- function(jd)
-{
   # Periodic terms in PA and QA - Table 1
   PA_C <- c(-5486.751211, -17.127623, -617.517403, 413.442940, 78.614193,
             -180.732815, -87.676083, 46.140315)
@@ -16,27 +15,7 @@ PrecessionMatrix <- function(jd)
             -145.278396, -34.744450, 22.885731)
   
   P1 <- c(708.15, 2309.0, 1620.0, 492.20, 1183.0, 622.0, 882.0, 547.0)
-  
-  # Periodic terms in XA and YA - Table 2
-  XA_C <- c(-819.940624, -8444.676815, 2600.009459, 2755.175630, -167.659835,
-            871.855056, 44.769698, -512.313065, -819.415595, -538.071099,
-            -189.793622, -402.922932, 179.516345, -9.814756)
-  
-  XA_S <- c(81491.287984, 787.163481, 1251.296102, -1257.950837, -2966.799730,
-            639.744522, 131.600209, -445.040117, 584.522874, -89.756563,
-            524.429630, -13.549067, -210.157124, -44.919798)
-  
-  YA_C <- c(75004.344875, 624.033993, 1251.136893, -1102.212834, -2660.664980,
-            699.291817, 153.167220, -950.865637, 499.754645, -145.188210,
-            558.116553, -23.923029, -165.405086, 9.344131)
-  
-  YA_S <- c(1558.515853, 7774.939698, -2219.534038, -2523.969396, 247.850422,
-            -846.485643, -1393.124055, 368.526116, 749.045012, 444.704518,
-            235.934465, 374.049623, -171.330180, -22.899655)
-  
-  P2 <- c(256.75, 708.15, 274.20, 241.45, 2309.0, 492.20, 396.10, 288.90,
-          231.10, 1610.0, 620.0, 157.87, 220.30, 1200.0)
-  
+
   # Obliquity at J2000.0
   eps0 <- 84381.406 * ARCSEC2RAD
   
@@ -71,6 +50,38 @@ PrecessionMatrix <- function(jd)
   ecliptic_pole[1] <- P
   ecliptic_pole[2] <- -Q*C - Z*S
   ecliptic_pole[3] <- -Q*S + Z*C
+
+  return (ecliptic_pole)
+
+}
+
+# Calculate the unit vector for the pole of the equator
+EquatorPole <- function(jd) {
+  
+  # Periodic terms in XA and YA - Table 2
+  XA_C <- c(-819.940624, -8444.676815, 2600.009459, 2755.175630, -167.659835,
+            871.855056, 44.769698, -512.313065, -819.415595, -538.071099,
+            -189.793622, -402.922932, 179.516345, -9.814756)
+  
+  XA_S <- c(81491.287984, 787.163481, 1251.296102, -1257.950837, -2966.799730,
+            639.744522, 131.600209, -445.040117, 584.522874, -89.756563,
+            524.429630, -13.549067, -210.157124, -44.919798)
+  
+  YA_C <- c(75004.344875, 624.033993, 1251.136893, -1102.212834, -2660.664980,
+            699.291817, 153.167220, -950.865637, 499.754645, -145.188210,
+            558.116553, -23.923029, -165.405086, 9.344131)
+  
+  YA_S <- c(1558.515853, 7774.939698, -2219.534038, -2523.969396, 247.850422,
+            -846.485643, -1393.124055, 368.526116, 749.045012, 444.704518,
+            235.934465, 374.049623, -171.330180, -22.899655)
+  
+  P2 <- c(256.75, 708.15, 274.20, 241.45, 2309.0, 492.20, 396.10, 288.90,
+          231.10, 1610.0, 620.0, 157.87, 220.30, 1200.0)
+  
+  # Julian centuries since J2000.0
+  T <- (jd - 2451545.0) / 36525
+  T2 <- T * T
+  T3 <- T2 * T
   
   # Sum the periodic terms for XA and YA
   sum_xa <- 0.0
@@ -99,9 +110,19 @@ PrecessionMatrix <- function(jd)
   } else {
     equator_pole[3] <- 0.0
   }
+
+  return (equator_pole)
+}
+
+# Calculate the precession matrix
+PrecessionMatrix <- function(jd)
+{
   
   # Calculate the precession matrix
   prec_mat <- matrix(0.0, nrow=3, ncol=3)
+
+  ecliptic_pole <- EclipticPole(jd)
+  equator_pole <- EquatorPole(jd)
   
   v <- CrossProduct(equator_pole, ecliptic_pole)
   normal_vec <- UnitVector(v)
@@ -118,4 +139,25 @@ PrecessionMatrix <- function(jd)
   prec_mat[3,3] <- equator_pole[3]
   
   return(prec_mat)
+}
+
+# Calculate the precession matrix including GCRS frame bias
+PrecessionMatrixGCRSFrameBias <- function(jd) {
+  
+  precMat <- PrecessionMatrix(jd)
+  
+  frameBiasMatrix <- matrix(0.0, nrow=3, ncol=3)
+  frameBiasMatrix[1,1] <- 0.99999999999999425
+  frameBiasMatrix[1,2] <- -7.1e-08
+  frameBiasMatrix[1,3] <- 8.056e-08
+  frameBiasMatrix[2,1] <- 7.1e-08
+  frameBiasMatrix[2,2] <- 0.99999999999999695
+  frameBiasMatrix[2,3] <- 3.306e-08
+  frameBiasMatrix[3,1] <- -8.056e-08
+  frameBiasMatrix[3,2] <- 3.306e-08
+  frameBiasMatrix[3,3] <- 0.999999999999996208
+
+  prod <- frameBiasMatrix %*% precMat
+
+  return (prod)
 }

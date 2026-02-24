@@ -1,6 +1,10 @@
 project:
   type: book
   output-dir: _book
+  pre-render: _common.R
+  
+execute:
+  dir: project
 
 book:
   title: "Computational Astronomy"

@@ -2,4 +2,11 @@
 
 ------------------------------------------------------------------------
 
+```{r}
+#| eval: true 
+#| echo: false
+#| include: false
+source("_common.R")
+```
+
 This is the website for **"Computational Astronomy"**. This book will teach you how to do computational astronomy and hopefully be a reference for all aspects of calculating astronomical phenomena.

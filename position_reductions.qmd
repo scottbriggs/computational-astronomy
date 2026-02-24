@@ -2,7 +2,10 @@
 
 ------------------------------------------------------------------------
 
-```{r include = FALSE}
+```{r}
+#| eval: true 
+#| echo: false 
+#| include: false
 source("_common.R")
 ```
 
@@ -33,6 +36,22 @@ The mean place is defined by the planet's barycentric (referred to the solar sys
 ### Abberation of Light
 
 ### Precession
+
+The precession model used is the long-term model from [@vondrak2011new]. This precession model is consistent in accuracy with the IAU 2006 [@urban2012explanatory] model for the J2000.0 epoch, a few arcseconds through the historical period, and a few tenths of a degree at the ends of the $\pm$ 200 millennia. The model will calculate the following results:
+
+-   a unit vector for the pole of the ecliptic with respect to the J2000.0 mean equator and equinox
+
+-   a unit vector for the pole of the equator with respect to the J2000.0 mean equator and equinox
+
+-   the precession matrix from J2000.0 to the date of interest
+
+-   the precession matrix from J2000.0 to the date of interest including GCRS frame bias matrix
+
+```{r}
+source("src/R/Ephemeris/Scripts.R")
+julianDay <- 1219339.078
+ecliptical_pole <- EclipticPole(julianDay)
+```
 
 ### Nutation
 

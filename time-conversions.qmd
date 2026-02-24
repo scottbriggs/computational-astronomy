@@ -2,12 +2,13 @@
 
 ------------------------------------------------------------------------
 
-```{r include = FALSE}
+```{r}
+#| eval: true 
+#| echo: false 
+#| include: false
 source("_common.R")
 ```
 
 ## Background
 
 ## Julian Day Number
-
-
