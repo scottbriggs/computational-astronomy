@@ -1,15 +1,9 @@
 # Extract data for Mercury from the DE441 ephemeris and store the data
 # in parquet file format. Pass the file name, block size, and file length
 
-ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
+ProcessDE441Mercury <- function(asciiFile, fileName, fileBlocks, 
+                                fileLength, numCoeff, numInterval)
 {
-  log_info('Process data for Mercury')
-  log_info('Reading filename {filename}')
-  log_info('Number of Blocks = {fileBlocks}')
-  log_info('File Length = {fileLength}')
-  
-  ascii_data <- readLines(here("data", "raw", "de441", filename))
-  
   # Create vector to store the ascii data sequentially based on the block size
   # Size of the vector is the block size * 341 lines in each block *
   # 3 data elements in each line
@@ -24,21 +18,21 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
     for (j in seq(from = 0, to = 339, by = 1)){
       
       # First data element in the row
-      tmpstr1 <- as.character(substr(ascii_data[j+i], 4, 26))
+      tmpstr1 <- as.character(substr(asciiFile[j+i], 4, 26))
       tmpstr1 <- chartr(old = "D", new = "E", tmpstr1)
       tmpstr1 <- as.numeric(tmpstr1)
       vect[k] <- tmpstr1
       k <- k + 1
       
       # Second data element in the row
-      tmpstr1 <- as.character(substr(ascii_data[j+i], 30, 52))
+      tmpstr1 <- as.character(substr(asciiFile[j+i], 30, 52))
       tmpstr1 <- chartr(old = "D", new = "E", tmpstr1)
       tmpstr1 <- as.numeric(tmpstr1)
       vect[k] <- tmpstr1
       k <- k + 1
       
       # Third data element in the row
-      tmpstr1 <- as.character(substr(ascii_data[j+i], 56, 78))
+      tmpstr1 <- as.character(substr(asciiFile[j+i], 56, 78))
       tmpstr1 <- chartr(old = "D", new = "E", tmpstr1)
       tmpstr1 <- as.numeric(tmpstr1)
       vect[k] <- tmpstr1
@@ -50,8 +44,8 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   # Number of columns = # of coefficients * 3 (x, y, z) + 3 (julian day start,
   # julian day end, and interval)
   # Number of rows = number of blocks * the number of intervals
-  numColumnsMercury = DE441NUMCOEFFMERCURY*3+3
-  numRowsMercury = fileBlocks * DE441NUMSUBINTMERCURY
+  numColumnsMercury = numCoeff*3+3
+  numRowsMercury = fileBlocks * numInterval
   mercury_col_names <- c("Julian_Day_Start", "Julian_Day_End", "INTERVAL",
                          "X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9",
                          "X10", "X11", "X12", "X13", "X14", "Y1", "Y2", "Y3", "Y4",
@@ -62,7 +56,7 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   colnames(mercury_data) <- mercury_col_names
   
   # Populate the intervals for Mercury
-  for (i in seq(from = 1, to = numRowsMercury, by = DE441NUMSUBINTMERCURY)){
+  for (i in seq(from = 1, to = numRowsMercury, by = numInterval)){
     mercury_data[i, "INTERVAL"] <- 1
     mercury_data[i+1, "INTERVAL"] <- 2
     mercury_data[i+2, "INTERVAL"] <- 3
@@ -71,7 +65,7 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   
   # Populate the Julian Days for Mercury
   j <- 1
-  for (i in seq(from = 1, to = numRowsMercury, by = DE441NUMSUBINTMERCURY)){
+  for (i in seq(from = 1, to = numRowsMercury, by = numInterval)){
     mercury_data[i, "Julian_Day_Start"] <- vect[j]
     mercury_data[i, "Julian_Day_End"] <- vect[j+1]
     mercury_data[i+1, "Julian_Day_Start"] <- vect[j]
@@ -85,7 +79,7 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   
   # Populate Mercury subinterval 1
   k <- 0
-  for (i in seq(from = 1, to = numRowsMercury, by = DE441NUMSUBINTMERCURY)){
+  for (i in seq(from = 1, to = numRowsMercury, by = numInterval)){
     for (j in seq(from = 3, to = 44, by = 1)){
       mercury_data[i, j+1] <- vect[j+k]
     }
@@ -94,7 +88,7 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   
   # Populate Mercury subinterval 2
   k <- 42
-  for (i in seq(from = 2, to = numRowsMercury, by = DE441NUMSUBINTMERCURY)){
+  for (i in seq(from = 2, to = numRowsMercury, by = numInterval)){
     for (j in seq(from = 3, to = 44, by = 1)){
       mercury_data[i, j+1] <- vect[j+k]
     }
@@ -103,7 +97,7 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   
   # Populate Mercury subinterval 3
   k <- 84
-  for (i in seq(from = 3, to = numRowsMercury, by = DE441NUMSUBINTMERCURY)){
+  for (i in seq(from = 3, to = numRowsMercury, by = numInterval)){
     for (j in seq(from = 3, to = 44, by = 1)){
       mercury_data[i, j+1] <- vect[j+k]
     }
@@ -112,7 +106,7 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   
   # Populate Mercury subinterval 4
   k <- 126
-  for (i in seq(from = 4, to = numRowsMercury, by = DE441NUMSUBINTMERCURY)){
+  for (i in seq(from = 4, to = numRowsMercury, by = numInterval)){
     for (j in seq(from = 3, to = 44, by = 1)){
       mercury_data[i, j+1] <- vect[j+k]
     }
@@ -120,13 +114,10 @@ ProcessDE441Mercury <- function(filename, fileBlocks, fileLength)
   }
   
   # Create file name to save
-  fn <- stringr::str_sub(filename, 1, 9)
+  fn <- stringr::str_sub(fileName, 1, 9)
   fnn <- paste(sep = "", "Mercury_", fn, "_441", ".parquet")
-  
-  logger::log_info('Saving filename {fnn}')
   
   #Save Mercury data
   df <- as.data.frame(mercury_data)
-  arrow::write_parquet(df, here::here("data", "processed", 
-                         "Mercury", fnn))
+  arrow::write_parquet(df, here::here("data", "processed", "de441", "Mercury", fnn))
 }
