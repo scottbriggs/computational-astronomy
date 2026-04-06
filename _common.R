@@ -20,10 +20,6 @@ library(data.table)
 library(purrr)
 library(readr)
 
-# Source all functions
-#source(here::here("src", "R", "Ephemeris", "Scripts.R"))
-source("src/R/Ephemeris/Scripts.R")
-
 # Set options for creating docs
 knitr::opts_chunk$set(
   echo = TRUE,

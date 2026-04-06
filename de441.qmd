@@ -9,7 +9,9 @@
 source("_common.R")
 ```
 
-The JPL Development Ephemeris 441 (DE441) provides accurate data on the positions of the planets, moon, sun, nutation angles, and lunar librations. The time frame for DE441 is:
+The JPL Development Ephemeris 441 (DE441) provides accurate data on the positions of the planets, moon, sun, nutation angles, and lunar librations. @park2021jpl describes the details for the creation of the DE441 Ephemeris.
+
+The time frame for DE441 is:
 
 -   Start Epoch: Julian Day Number = -3100015.5
 -   Start Epoch: Julian Calendar Date = August 15, -13200
@@ -18,24 +20,22 @@ The JPL Development Ephemeris 441 (DE441) provides accurate data on the position
 
 ## DE441 Files and File Structure
 
-| Name | Reference | Units | Coordinates | Coefficients | Subintervals |
-|:-----------|------------|------------|------------|------------|------------|
-| Mercury | SSB | km | x, y, z | 14 | 4 |
-| Venus | SSB | km | x, y, z | 10 | 2 |
-| EMB | SSB | km | x, y, z | 13 | 2 |
-| Mars | SSB | km | x, y, z | 11 | 1 |
-| Jupiter | SSB | km | x, y, z | 8 | 1 |
-| Saturn | SSB | km | x, y, z | 7 | 1 |
-| Uranus | SSB | km | x, y, z | 6 | 1 |
-| Neptune | SSB | km | x, y, z | 6 | 1 |
-| Pluto | SSB | km | x, y, z | 6 | 1 |
-| Moon | Earth | km | x, y, z | 13 | 8 |
-| Sun | SSB | km | x, y, z | 11 | 2 |
-| Nutations |  | radians | $\Delta\, \psi$, $\,\Delta\, \epsilon$ | 0 | 0 |
-| Lunar Mantle Librations |  | radians | $\phi$, $\,\theta\,$, $\,\psi$ | 10 | 4 |
-| Lunar Mantle Angular Velocity |  | radians per day | $\omega_x$, $\,\omega_y$, $\,\omega_z$ | 0 | 0 |
-| TT-TDB |  | seconds |  | 0 | 0 |
+| Name | Reference | Units | Coordinates | Coefficients | Intervals | Block Offset |
+|:----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Mercury | SSB | KM | x, y, z | 14 | 4 | 3 |
+| Venus | SSB | KM | x, y, z | 10 | 2 | 171 |
+| EMB | SSB | KM | x, y, z | 13 | 2 | 231 |
+| Mars | SSB | KM | x, y, z | 11 | 1 | 309 |
+| Jupiter | SSB | KM | x, y, z | 8 | 1 | 342 |
+| Saturn | SSB | KM | x, y, z | 7 | 1 | 366 |
+| Uranus | SSB | KM | x, y, z | 6 | 1 | 387 |
+| Neptune | SSB | KM | x, y, z | 6 | 1 | 405 |
+| Pluto | SSB | KM | x, y, z | 6 | 1 | 423 |
+| Moon | Earth | KM | x, y, z | 13 | 8 | 441 |
+| Sun | SSB | KM | x, y, z | 2 | 2 | 753 |
+| Nutation |  | Radians | $\Delta\, \psi$, $\,\Delta\, \epsilon$ | 10 | 4 | 819 |
+| Libration |  | Radians | $\phi$, $\,\theta\,$, $\,\psi$ | 10 | 4 | 899 |
 
 : DE441 Bodies {#tbl-de440-441bodies .striped .hover}
 
-See @tbl-de440-441bodies
+@tbl-de440-441bodies describes the solar system bodies and the parameters used to extract data from each of the 30 ASCII files. Data on each solar system body was extracted, merged across all files, and added to a database that allows for easy querying of data across the entire date range of the ephemeris.
