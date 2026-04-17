@@ -48,12 +48,16 @@ The precession model used is the long-term model from [@vondrak2011new]. This pr
 -   the precession matrix from J2000.0 to the date of interest including GCRS frame bias matrix
 
 ```{r}
-source("src/R/Ephemeris/Scripts.R")
-julianDay <- 1219339.078
-ecliptical_pole <- EclipticPole(julianDay)
+
 ```
 
 ### Nutation
+
+The nutation matrix $\, \mathbf{N} \,$ is a sequence of three rotations which uses the nutation in longitude, $\, \Delta\, \psi \,$, the nutation in obliquity, $\, \Delta\, \epsilon \,$, and the mean obliquity of the ecliptic, $\, \epsilon_0 \,$, to transform equatorial coordinates referred to the mean equinox and equator of date to the true equinox and equator of date.
+
+The rotations are a rotation of $\, \epsilon_0 \,$ about the x-axis, which transforms the xy-plane from the mean equator of date to the mean ecliptic of date, followed by a rotation of $\, -\Delta\, \psi \,$ about the z-axis, which applies nutation in longitude and rotates the x-axis, pointing toward the mean equinox of date $\, \Upsilon \,$, to the true equinox of date $\, \Upsilon_T \,$, and lastly, a rotation of $\, -\epsilon \,$, the true obliquity of date, about the x-axis, which rotates the xy-plane to the true equator of date @seidelmann1992explanatory.
+
+$\mathsf{\mathbf{N} = R_X \, (-\epsilon) \, R_Z \, (-\Delta\, \psi) \, R_X \, (\epsilon_0)}$
 
 ## Calculating the Apparent Place of Planets
 

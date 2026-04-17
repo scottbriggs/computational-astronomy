@@ -1,24 +1,13 @@
 
 # Use here for relative file paths
 library(here)
-library(logger)
 library(arrow)
-library(writexl)
-library(readxl)
+library(duckdb)
+library(DBI)
 library(dplyr)
 library(stringi)
 library(stringr)
-library(httr)
-library(jsonlite)
-library(duckdb)
-library(tidygeocoder)
-library(lutz)
-library(lubridate)
-library(kableExtra)
-library(magrittr)
 library(data.table)
-library(purrr)
-library(readr)
 
 # Set options for creating docs
 knitr::opts_chunk$set(

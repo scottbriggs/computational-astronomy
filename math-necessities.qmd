@@ -29,11 +29,11 @@ $\hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} = \left(\frac{v_x}{\|\math
 
 ## Rotation Matrices
 
-$R_x(\phi) = \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\, \phi & -sin\, \phi \\ 0 & sin\, \phi & cos\, \phi \end{bmatrix}$
+$R_X(\phi) = \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\, \phi & -sin\, \phi \\ 0 & sin\, \phi & cos\, \phi \end{bmatrix}$
 
-$R_y(\phi) = \begin{bmatrix} cos\, \phi & 0 & sin\, \phi \\ 0 & 1 & 0 \\ -sin\, \phi & 0 & cos\, \phi \end{bmatrix}$
+$R_Y(\phi) = \begin{bmatrix} cos\, \phi & 0 & sin\, \phi \\ 0 & 1 & 0 \\ -sin\, \phi & 0 & cos\, \phi \end{bmatrix}$
 
-$R_z(\phi) = \begin{bmatrix} cos\, \phi\, & -sin\, \phi & 0 \\ sin\, \phi & cos\, \phi\, & 0 \\ 0 & 0 & 1 \end{bmatrix}$
+$R_Z(\phi) = \begin{bmatrix} cos\, \phi\, & -sin\, \phi & 0 \\ sin\, \phi & cos\, \phi\, & 0 \\ 0 & 0 & 1 \end{bmatrix}$
 
 ## Matrix Multiplication
 

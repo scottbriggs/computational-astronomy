@@ -35,8 +35,12 @@ format:
     theme:
       light: [flatly, computational-astronomy-flatly.scss]
       dark: [darkly, computational-astronomy-darkly.scss]
+    highlight-style:
+      light: atom-one
+      dark: atom-one
     respect-user-color-scheme: true
-    code-link: true
+    code-block-bg: true
+    code-block-border-left: true
 
     author-meta: "Scott Briggs"
     callout-appearance: simple

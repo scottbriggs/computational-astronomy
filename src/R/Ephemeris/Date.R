@@ -2,82 +2,30 @@
 # Date functions
 
 # Julian Day Number
-# Use the NASA API to retrieve the julian day number given a calendar date
-# The year ranges from -9999-01-01 to 99999-12-31
-# The month ranges from 01-12
-# The day ranges from 01-31
-# Hours range from 1 - 23
-# Minutes range from 1 59
-# Seconds range from 1 - 59
-
-JulianDayNumber <- function(year, month, day, hour, minute, second) {
-  
-  # Format datetime for the API
-  datetime <- sprintf("%+05d-%02d-%02d_%02d:%02d:%02d", year, month, day, hour, minute, second)
-  
-  # Build API URL
-  url <- paste0("https://ssd-api.jpl.nasa.gov/jd_cal.api?cd=", datetime)
-  
-  httr::set_config(httr::config(ssl_verifypeer = FALSE))
-  
-  # Perform GET request
-  response <- GET(url)
-  
-  # Check if request was successful
-  if (status_code(response) != 200) {
-    stop("API request failed: ", content(response, "text"))
-  }
-  
-  # Parse API response
-  data <- fromJSON(rawToChar(response$content))
-  
-  return(as.numeric(data$jd))
-}
-
-# Calendar Date
-# Use the NASA API to retrieve the calendar date for a julian day number
-# The julian date number can range from -1931076.5 to 38245308.5
-CalendarDate <- function(jd)
+JulianDayNumber <- function(year, month, day)
 {
-  # Format API URL
-  url <- paste0("https://ssd-api.jpl.nasa.gov/jd_cal.api?jd=", jd, "&format=d.5")
+  # Day is a float
+  int_day <- as.integer(day)
+  frac_day <- day - int_day
   
-  httr::set_config(httr::config(ssl_verifypeer = FALSE))
+  con <- dbConnect(duckdb(dbdir=here("data", "database", "de441.duckdb")))
   
-  # Perform GET request
-  response <- GET(url)
+  query_str <- "select jdn from JulianDayNumber where year = ? 
+and month_number = ? and day = ?"
   
-  # Check for a successful response
-  if (status_code(response) != 200) {
-    stop("API request failed: ", content(response, "text"))
-  }
+  jd <- dbGetQuery(con, query_str, params = list(year, month, int_day))
   
-  # Parse JSON response
-  data <- fromJSON(rawToChar(response$content))
+  dbDisconnect(con, shutdown = TRUE)
   
-  # Extract components from the response
-  year <- data$year
-  month <- data$month_name
-  day <- as.integer(data$day_and_time)
-  doy <- data$doy
-  dow_name <- data$dow_name
+  if (frac_day == 0) {jdn = jd -1 + 0.5}
   
-  # Convert fractional days to hours, minutes, and seconds
-  frac_day <- as.numeric(data$day_and_time) - as.integer(data$day_and_time)
+  if (frac_day == 0.5) {jdn = jd}
   
-  total_seconds <- frac_day * SECDAY
+  if (frac_day > 0.5) {jdn <- jd + frac_day - 0.5}
   
-  hours <- floor(total_seconds / 3600)
-  minutes <- floor((total_seconds %% 3600) / 60)
-  seconds <- round(total_seconds %% 60)
+  if (frac_day < 0.5 && frac_day > 0) {jdn <- jd - 1 + 0.5 + frac_day}
   
-  df <- data.frame(year, month, day, hours, minutes, seconds, jd, dow_name,
-                   doy)
-  
-  colnames(df) <- c("Year", "Month", "Day", "Hours", "Minutes", "Seconds",
-                    "JDN", "DOW", "DOY")
-  
-  return(df)
+  return (as.numeric(jdn))
 }
 
 # Calculate the date of Easter in the Gregorian and Julian calendars

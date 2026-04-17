@@ -38,4 +38,29 @@ The time frame for DE441 is:
 
 : DE441 Bodies {#tbl-de440-441bodies .striped .hover}
 
-@tbl-de440-441bodies describes the solar system bodies and the parameters used to extract data from each of the 30 ASCII files. Data on each solar system body was extracted, merged across all files, and added to a database that allows for easy querying of data across the entire date range of the ephemeris.
+@tbl-de440-441bodies describes the solar system bodies and the parameters used to extract data from each of the 30 ASCII files. Data on each solar system body was extracted, merged across all files, and inserted into a database that allows for easy querying of data across the entire date range of the ephemeris. Based on a timeframe, data for each solar system body is extracted and the position and velocity vectors calculated using the following steps:
+
+1.  For the body of interest and time frame, retrieve the coefficients and intervals from the database
+
+2.  Calculate the subinterval
+
+3.  Subset the data for the subinterval
+
+4.  Normalize the Julian Day Number
+
+5.  Calculate the Chebyshev polynomials for the position and velocity vectors
+
+6.  Calculate the position and velocity vectors using the Chebyshev polynomials
+
+7.  Scale the velocity vector
+
+Examples of calculating the position and velocity vectors of solar system bodies
+
+```{r}
+source("src/R/Ephemeris/PositionBodySSB.R")
+source("src/R/Ephemeris/Date.R")
+jd <- JulianDayNumber(2019, 12, 15)
+PositionBodySSB("Mercury", jd)
+PositionBodySSB("Venus", jd)
+PositionBodySSB("EMB", jd)
+```
