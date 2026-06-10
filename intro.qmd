@@ -11,13 +11,22 @@ source("_common.R")
 
 ## Computational Astronomy
 
+This book will focus on the following topics:
+
+- Developing and calculating ephemerides of the Sun, Moon, and planets
+- Calculating the rise, transit, and set of the Sun, Moon, and planets
+- The prediction, circumstances, and visibility of solar eclipses
+- The prediction, circumstances, and visibility of lunar eclipses
+- Phases of the moon and the inner planets
+- Earth seasons
+
 ## Benefits of Using R and R Studio
 
 This book will use the R language and the R Studio Integrated Development Environment (IDE) to develop and test code for computational astronomy. The benefits of using R and R Studio are:
 
--   R is an environment for data analysis, statistical computing, and graphics - [R Foundation](https://www.r-project.org)
--   R is highly extensible, with thousands of packages available through the Comprehensive R Archive Network (CRAN) for specialized functions
--   R Studio Desktop is a free tool from [Posit](https://posit.co/download/rstudio-desktop/) that allows for the efficient development and testing of R code and documentation.
+- R is an environment for data analysis, statistical computing, and graphics - [R Foundation](https://www.r-project.org)
+- R is highly extensible, with thousands of packages available through the Comprehensive R Archive Network (CRAN) for specialized functions
+- R Studio Desktop is a free tool from [Posit](https://posit.co/download/rstudio-desktop/) that allows for the efficient development and testing of R code and documentation.
 
 ## DE441 Ephemeris
 

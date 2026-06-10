@@ -2,97 +2,67 @@
 
 ------------------------------------------------------------------------
 
-```{r}
-#| eval: true 
-#| echo: false
-#| include: false
-source("_common.R")
-```
+@fig-coordsys illustrates common coordinate systems used in astronomy and also how to convert between the coordinate systems.
 
-## Summary
+![Astronomical Coordinate Systems](images/CoordinateSystemGraphic.png){#fig-coordsys}
 
-## Cartesian Coordinates to Spherical Coordinates
+## Horizon Coordinate System
 
-$\mathsf{r = \sqrt(x^2 + y^2 + z^2)}$
+The horizon system is a left-handed system centered on the observer where the x-axis points to the north on the observer's horizon, the y-axis points to the east on the observer's horizon, and the z-axis points to the observer's zenith.
 
-$\mathsf{\alpha = tan^{-1}\dfrac{y}{x}}$
+The longitudinal coordinate called the azimuth A represents the angle measured from the north point of the horizon and passing eastward to the object's hour circle. Azimuth ranges from 0 to $2\pi$ radians or 0 - $360^\circ$.
 
-$\mathsf{\varphi = tan^{-1}\dfrac{z}{r}}$
+The latitudinal coordinate called altitude $\alpha$ represents the angle from the horizon up to the object. Altitude ranges from $\pm \, \frac{\pi}{2}$ or $\pm \, 90^\circ$, with negative values indicating the object is below the horizon.
 
-## Polar Coordinates to Rectangular Coordinates
+## Equatorial Coordinate System
 
-$\mathsf{x = r\, cos\, \alpha\, sin\, \varphi}$
+The equatorial system is a right-handed system centered on the celestial equator where the x-axis points toward the vernal equinox, the y-axis points $90^\circ$ to the east, and the z-axis points to the celestial pole. The vernal equinox is the point where the Sun crosses the celestial equator moving northward.
 
-$\mathsf{x = r\, sin\, \alpha\, sin\, \varphi}$
+The longitudinal coordinate called the right ascension $\alpha$ is measured eastward from the vernal equinox on the celestial equator. The right ascension ranges from 0 to $2\pi$ radians or 0 - $360^\circ$.
 
-$\mathsf{z = r\, cos\, \varphi}$
+The latitudinal coordinate called the declination $\delta$ is the angular distaince north or south of the celestial equator. Declination ranges from $\pm \, \frac{\pi}{2}$ or $\pm \, 90^\circ$.
 
-## Equatorial to Ecliptic Transformation
+Equatorial coordinates are fixed in that they are independent of time and an observer's location. However, Earth's axis is not fixed due to the effects of precession and nutation, which means that equatorial coordinates are linked to a specific epoch such as J2000.
 
-$\mathsf{sin\, \beta = sin\, \delta\, cos\, \varepsilon + cos\, \delta\, sin\, \varepsilon\, sin\, \alpha}$
 
-$\mathsf{tan\, \lambda = \dfrac{sin\, \alpha\, cos\, \varepsilon - tan\, \delta\, sin\, \varepsilon}{cos\, \alpha}}$
 
-::: callout-note
-This is an example of a note callout
-:::
+## Ecliptic Coordinate System
 
-## Ecliptic to Equatorial Transformation
+## Galactic Coordinate System
 
-$\mathsf{sin\, \delta = sin\, \beta\, cos\, \varepsilon + cos\, \beta\, sin\, \varepsilon\, sin\, \lambda}$
+## Coordinate System Conversions
 
-$\mathsf{tan\, \alpha = \dfrac{sin\, \lambda\, cos\, \varepsilon - tan\, \beta\, sin\, \varepsilon}{cos\, \lambda}}$
+### Converting Rectangular Cartesian Coordinates to Spherical Coordinates
 
-## Equatorial to Horizon Transformation
+$$\mathsf{r = \sqrt(x^2 + y^2 + z^2)}$$
 
-$\mathsf{sin\, h = sin\, \delta\, sin\, \phi + cos\, \delta\, cos\, \phi\, cos\, H}$
+$$\mathsf{\alpha = tan^{-1}\dfrac{y}{x}}$$
 
-$\mathsf{cos\, A = \dfrac{sin\, \delta - sin\, \phi\, sin\, h}{cos\, \phi\, cos\, h}}$
+$$\mathsf{\delta = tan^{-1}\dfrac{z}{r}}$$
 
-## Horizon to Equatorial Transformation
+### Converting Polar Coordinates to Rectangular Cartesian Coordinates
 
-$\mathsf{sin\, \delta = sin\, h\, sin\, \phi + cos\, h\, cos\, \phi\, cos\, A}$
+$$\mathsf{x = r\, cos\, \alpha\, sin\, \delta}$$
 
-$\mathsf{cos\, H = \dfrac{sin\, h - sin\, \phi\, sin\, \delta}{cos\, \phi\, cos\, \delta}}$
+$$\mathsf{x = r\, sin\, \alpha\, sin\, \delta}$$
 
-## Equatorial to Galatic Transformation
+$$\mathsf{z = r\, cos\, \delta}$$
 
-$\mathsf{sin\, b = cos\, \delta\, cos\, \delta_0\, cos(\alpha-\alpha_0) + sin\, \delta\, sin\, \delta_0}$
+### Converting Equatorial Coordinates to Ecliptic Coordinates
 
-$\mathsf{tan\, l = \dfrac{sin\, \delta - sin\, b\, sin\, \delta_0}{cos\, \delta\, sin(\alpha-\alpha_0)\, cos\, \delta_0} + N_0}$
+$$\begin{bmatrix} \mathsf{x_{ecliptic}} \\ \mathsf{y_{ecliptic}} \\ \mathsf{z_{ecliptic}} \end{bmatrix} = \mathsf{R_x} \, (\epsilon) \, \begin{bmatrix} \mathsf{x_{equatorial}} \\ \mathsf{y_{equatorial}} \\ \mathsf{z_{equatorial}}  \end{bmatrix}$$
 
-## Galatic to Equatorial Transformation
+### Converting Ecliptic Coordinates to Equatorial Coordinates
 
-$\mathsf{sin\, \delta = cos\, b\, cos\, \delta_0\, sin(l - N_0) + sin\, b\, sin\, \delta_0}$
+$$\begin{bmatrix} \mathsf{x_{equatorial}} \\ \mathsf{y_{equatorial}} \\ \mathsf{z_{equatorial}} \end{bmatrix} = \mathsf{R_x} \, (-\epsilon) \, \begin{bmatrix} \mathsf{x_{ecliptic}} \\ \mathsf{y_{ecliptic}} \\ \mathsf{z_{ecliptic}}  \end{bmatrix}$$
 
-$\mathsf{tan\, \alpha = \dfrac{cos\, b\, cos(l - N_0)}{sin\, b\, cos\, \delta_0 - cos\, b\, sin\, \delta_0\, sin(l - N_0)} + \alpha_0}$
+### Converting Equatorial Coordinates to Horizon Coordinates
 
-## Coordinate Systems
+### Converting Horizon Coordinates to Equatorial Coordinates
 
-+------------+----------------------------+--------------------------+-----------------------------------------------------------------+
-| System     | Coordinates                | Type                     | Range                                                           |
-+:===========+:===========================+:=========================+:================================================================+
-| Equatorial | Right Ascension - $\alpha$ | Geocentric               | $\alpha\, \in\, [0, 2\,\pi]$                                    |
-|            |                            |                          |                                                                 |
-|            | Declination - $\delta$     |                          | $\delta\, \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$     |
-+------------+----------------------------+--------------------------+-----------------------------------------------------------------+
-| Equatorial | Hour Angle - H             | Topocentric              | $\mathsf{H\,} \in\, [0, 2\, \pi]$                               |
-|            |                            |                          |                                                                 |
-|            | Declination - $\delta$     |                          | $\delta\, \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$     |
-+------------+----------------------------+--------------------------+-----------------------------------------------------------------+
-| Horizon    | Azimuth - A                | Topocentric              | $\mathsf{A\,} \in\, [0, 2\, \pi]$                               |
-|            |                            |                          |                                                                 |
-|            | Altitude - h               |                          | $\mathsf{h\,} \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$ |
-+------------+----------------------------+--------------------------+-----------------------------------------------------------------+
-| Ecliptic   | Longitude - $\lambda$      | Heliocentric, Geocentric | $\lambda\, \in\, [0, 2\,\pi]$                                   |
-|            |                            |                          |                                                                 |
-|            | Latitude - $\beta$         |                          | $\beta\, \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$      |
-+------------+----------------------------+--------------------------+-----------------------------------------------------------------+
-| Galactic   | Longitude - l              | Heliocentric             | $\mathsf{l\,} \in\, [0, 2\,\pi]$                                |
-|            |                            |                          |                                                                 |
-|            | Latitude - b               |                          | $\mathsf{b\,} \in\, [\mathsf{-\dfrac{\pi}{2}, \dfrac{\pi}{2}}]$ |
-+------------+----------------------------+--------------------------+-----------------------------------------------------------------+
+### Converting Equatorial Coordinates to Galactoc Coordinates
 
-: Coordinate Systems {#tbl-coordsys .striped .hover}
+### Converting Galactic Coordinates to Equatorial Coordinates
 
-See @tbl-coordsys.
+
+

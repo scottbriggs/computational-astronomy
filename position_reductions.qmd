@@ -9,13 +9,7 @@
 source("_common.R")
 ```
 
-## Introduction
-
 ## Place
-
-### Mean Place
-
-The mean place is defined by the planet's barycentric (referred to the solar system barycenter) equatorial rectangular (x, y, z) coordinates. The mean place is referred to the mean equator and equinox of J2000.0.
 
 ### Apparent Place
 
@@ -55,7 +49,7 @@ The precession model used is the long-term model from [@vondrak2011new]. This pr
 
 The nutation matrix $\, \mathbf{N} \,$ is a sequence of three rotations which uses the nutation in longitude, $\, \Delta\, \psi \,$, the nutation in obliquity, $\, \Delta\, \epsilon \,$, and the mean obliquity of the ecliptic, $\, \epsilon_0 \,$, to transform equatorial coordinates referred to the mean equinox and equator of date to the true equinox and equator of date.
 
-The rotations are a rotation of $\, \epsilon_0 \,$ about the x-axis, which transforms the xy-plane from the mean equator of date to the mean ecliptic of date, followed by a rotation of $\, -\Delta\, \psi \,$ about the z-axis, which applies nutation in longitude and rotates the x-axis, pointing toward the mean equinox of date $\, \Upsilon \,$, to the true equinox of date $\, \Upsilon_T \,$, and lastly, a rotation of $\, -\epsilon \,$, the true obliquity of date, about the x-axis, which rotates the xy-plane to the true equator of date @seidelmann1992explanatory.
+The rotations are a rotation of $\, \epsilon_0 \,$ about the x-axis, which transforms the xy-plane from the mean equator of date to the mean ecliptic of date, followed by a rotation of $\, -\Delta\, \psi \,$ about the z-axis, which applies nutation in longitude and rotates the x-axis, pointing toward the mean equinox of date $\, \Upsilon \,$, to the true equinox of date $\, \Upsilon_T \,$, and lastly, a rotation of $\, -\epsilon \,$, the true obliquity of date, about the x-axis, which rotates the xy-plane to the true equator of date [@seidelmann1992explanatory].
 
 $\mathsf{\mathbf{N} = R_X \, (-\epsilon) \, R_Z \, (-\Delta\, \psi) \, R_X \, (\epsilon_0)}$
 

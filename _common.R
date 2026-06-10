@@ -1,13 +1,8 @@
 
 # Use here for relative file paths
 library(here)
-library(arrow)
-library(duckdb)
 library(DBI)
-library(dplyr)
-library(stringi)
-library(stringr)
-library(data.table)
+library(duckdb)
 
 # Set options for creating docs
 knitr::opts_chunk$set(

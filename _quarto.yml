@@ -25,6 +25,7 @@ book:
     - coordinate-systems.qmd
     - position_reductions.qmd
     - de441.qmd
+    - glossary.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -35,10 +36,17 @@ format:
     theme:
       light: [flatly, computational-astronomy-flatly.scss]
       dark: [darkly, computational-astronomy-darkly.scss]
+      
+    mainfont: 'Inter, system-ui, -apple-system, sans-serif'
+    fontsize: 1.1rem
+    monofont: 'Fira Code, monospace'
+    
     highlight-style:
       light: atom-one
       dark: atom-one
+    
     respect-user-color-scheme: true
+    
     code-block-bg: true
     code-block-border-left: true
 

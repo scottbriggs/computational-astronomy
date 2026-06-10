@@ -13,10 +13,10 @@ The JPL Development Ephemeris 441 (DE441) provides accurate data on the position
 
 The time frame for DE441 is:
 
--   Start Epoch: Julian Day Number = -3100015.5
--   Start Epoch: Julian Calendar Date = August 15, -13200
--   Final Epoch: Julian Day Number = 8000016.5
--   Final Epoch: Gregorian Calendar Date = March 15, 17191
+- Start Epoch: Julian Day Number = -3100015.5
+- Start Epoch: Julian Calendar Date = August 15, -13200
+- Final Epoch: Julian Day Number = 8000016.5
+- Final Epoch: Gregorian Calendar Date = March 15, 17191
 
 ## DE441 Files and File Structure
 
@@ -36,9 +36,9 @@ The time frame for DE441 is:
 | Nutation |  | Radians | $\Delta\, \psi$, $\,\Delta\, \epsilon$ | 10 | 4 | 819 |
 | Libration |  | Radians | $\phi$, $\,\theta\,$, $\,\psi$ | 10 | 4 | 899 |
 
-: DE441 Bodies {#tbl-de440-441bodies .striped .hover}
+: DE441 Bodies
 
-@tbl-de440-441bodies describes the solar system bodies and the parameters used to extract data from each of the 30 ASCII files. Data on each solar system body was extracted, merged across all files, and inserted into a database that allows for easy querying of data across the entire date range of the ephemeris. Based on a timeframe, data for each solar system body is extracted and the position and velocity vectors calculated using the following steps:
+@tbl-de441bodies describes the solar system bodies and the parameters used to extract data from each of the 30 ASCII files. Data on each solar system body was extracted, merged across all files, and inserted into a database that allows for easy querying of data across the entire date range of the ephemeris. Based on a timeframe, data for each solar system body is extracted and the position and velocity vectors calculated using the following steps:
 
 1.  For the body of interest and time frame, retrieve the coefficients and intervals from the database
 
@@ -58,9 +58,18 @@ Examples of calculating the position and velocity vectors of solar system bodies
 
 ```{r}
 source("src/R/Ephemeris/PositionBodySSB.R")
+source("src/R/Ephemeris/Constants.R")
 source("src/R/Ephemeris/Date.R")
 jd <- JulianDayNumber(2019, 12, 15)
 PositionBodySSB("Mercury", jd)
 PositionBodySSB("Venus", jd)
 PositionBodySSB("EMB", jd)
+PositionBodySSB("Mars", jd)
+PositionBodySSB("Jupiter", jd)
+PositionBodySSB("Saturn", jd)
+PositionBodySSB("Uranus", jd)
+PositionBodySSB("Pluto", jd)
+PositionBodySSB("Moon", jd)
+PositionBodySSB("Sun", jd)
+PositionEarthSSB(jd)
 ```

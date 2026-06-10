@@ -1,0 +1,62 @@
+# Glossary
+
+------------------------------------------------------------------------
+
+```{r}
+#| eval: true 
+#| echo: false 
+#| include: false
+source("_common.R")
+```
+
+**Equatorial Coordinate System** - An analogous mapping of the earth's terrestrial latitude-longitude system onto the celestial sphere. See @tbl-coordsys for details.
+
+*Ecliptic Coordinate System* - A celestial mapping system using the ecliptic as the reference plane. See @tbl-coordsys for details.
+
+*Horizon Coordinate System* - A celestial mapping system that uses an observer's location and time on the earth's surface. See @tbl-coordsys for details.
+
+*Galactic Coordinate System* - A celestial mapping system that is aligned with the fundamental place of the Milky Way galaxy. See @tbl-coordsys for details.
+
+*Aberration* - The apparent displacement in the position of a celestial body caused by the finite speed of light combined with the motion of the observer
+
+- *Light-time displacement* - The apparent offset in a solar system object’s calculated position caused by the finite speed of light. The object is observed where it was when light left it, not where it is at the time of observation.
+
+- *Stellar Aberation* - Composed of diurnal aberration, annual aberration, and secular aberration
+
+- *Diurnal Aberration* - Component of stellar aberration from the daily motion of the earth
+
+- *Annual Aberration* - Component of stellar aberration from the motion of the earth around the sun
+
+- *Secular Aberration* - Component of stellar aberration from the motion of the solar system in space and is usually disregarded in calculations
+
+- *Gravitational Light Deflection* - The apparent shift in a solar system object’s observed position caused by the bending of its light path as it passes through the gravitational field of massive bodies like the Sun. The deflection increases the closer the light path is to the Sun.
+
+*Ecliptic* - The apparent path of the Sun around the celestial sphere. Also defined as the mean plane of the orbit of the Earth-Moon barycenter around the solar system barycenter. The ecliptic is offset to the celestial equator by an angle of approximately 23.4 degrees.
+
+*Equator* - The projection onto the celestial sphere of the Earth's equator. Also defined as the great circle on the surface of a body formed by the intersection of its surface with the plane passing through the center of the body perpendicular to the axis of rotation.
+
+*Equinox* - Either of the two points on the celestial sphere at which the ecliptic intersects the celestial equator. The time at which the center of the Sun crosses the Earth's equator. At these times the apparent ecliptic longitude of the Sun is approximately either 0° or 180°. The vernal equinox occurs in the spring and the autumnal equinox occurs in autumn.
+
+*Mean Place* - The mean place (coordinates) of a celestial body are determined relative to the mean equator and equinox for a specific date and includes the correction for precession. The mean place is usually referred to the mean equator and equinox of J2000.0, which is January 1, 2000, at 12:00 TT (Terrestrial Time) with the Julian day number equal to 2451545.0.
+
+*True Place* - The true place applies a nutation correction to the mean place.
+
+*Apparent Place* - The apparent place applies aberration corrections to the true place.
+
+*Right Ascension* - The longitudinal component of an object in the equatorial coordinate system. It is measured eastward from the vernal equinox in units of hours and ranges from $\mathsf{\, 0 - 24 \, hours \,}$.
+
+*Declination* - The latitudinal component of an object in the equatorial coordinate system. It is measured north or south of the celestial equator and ranges from $\, 0 \pm 90^{\circ} \,$.
+
+*Hour Angle* -
+
+*Azimuth* -
+
+*Altitude* -
+
+*Ecliptic Longitude* - The longitudinal component of an object in the ecliptical coordinate system. It is measured eastward from the vernal equinox in units of degrees and ranges from $\, 0 - 360^{\circ} \,$.
+
+*Ecliptic Latitude* - The latitudinal component of an object in the ecliptical coordinate system. It is measured north or south of the ecliptic in units of degrees and ranges from $\, 0 \pm 90^{\circ} \,$.
+
+*Galactic Longitude* -The longitudinal component of an object in the galactic coordinate system. The intersection point farthest away from the Sun that lies in the direction of the constellation Sagittarius represents the reference point for measuring galactic longitude and ranges from $\, 0 - 360^{\circ} \,$ measured eastward.
+
+*Galactic Latitude* - The latitudinal component of an object in the galactic coordinate system. It is measured north or south of the galactic equator in units of degrees and ranges from $\, 0 \pm 90^{\circ} \,$. The galactic equator is inclined to the celestial equator by $\, 62^{\circ} \,$.
